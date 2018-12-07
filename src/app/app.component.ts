@@ -34,6 +34,7 @@ export class AppComponent {
     this.testStarted = true;
 
     this.randomQuestions = testQuestions.sort(() => .5 - Math.random());
+    console.log('kérdések száma:' + this.randomQuestions.length);
     this.currentQuestionIndex = 0;
     this.setNextQuestions();
     this.startCountdownTimer();

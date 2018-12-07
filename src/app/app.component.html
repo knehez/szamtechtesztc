@@ -25,12 +25,12 @@
       </tr>
     </table>
   </div>
-  <br/>
+  <br />
   <div style="text-align:center" *ngIf="testStarted">
     <h2>Elért eredmény: {{correctAnswers}}/{{questionsInTest}} ({{correctAnswers*100/questionsInTest | number:'1.2-2'
       }}%)</h2>
   </div>
-  <br/>
+  <br />
   <div *ngIf="testStarted">
     <table align="center">
       <tr>
@@ -39,21 +39,25 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td align="center">
           <h2>{{randomQuestions[currentQuestionIndex].question}}</h2>
         </td>
       </tr>
+    </table>
+    <table align="center">
       <tr>
-        <td class="ui table form">
+        <td class="ui table form" style="width:400px;">
           <code><pre [innerHtml]="currentCode"></pre></code>
         </td>
-      </tr>
-    </table>
-    <table align="center" class="ui table form" style="width:300px; margin-left: auto; margin-right: auto;">
-      <tr *ngFor="let answer of currentAnswers; let i=index">
-        <td style="font-size: 1.3em;padding:0 15px 0 15px;width:60%" [innerHtml]="answer"></td>
-        <td><input type="button" class="ui positive  basic button" value="Ez a helyes" (click)="checkSolution(i)"
-            [disabled]="testFinished"></td>
+        <td>
+          <table align="center" class="ui table form" style="width:300px;">
+            <tr *ngFor="let answer of currentAnswers; let i=index">
+              <td style="font-size: 1.3em;padding:0 15px 0 15px;width:60%" [innerHtml]="answer"></td>
+              <td><input type="button" class="ui positive  basic button" value="Ez a helyes" (click)="checkSolution(i)"
+                  [disabled]="testFinished"></td>
+            </tr>
+          </table>
+        </td>
       </tr>
     </table>
     <table align="center">

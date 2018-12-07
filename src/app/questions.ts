@@ -210,19 +210,6 @@ export const testQuestions =
         {
             'question': 'Mi a program kimenete?',
             code: `
-            #include "stdio.h";
-            int x;
-            void main()
-            {
-                printf("%d", x);
-            }
-            `,
-            wrong: ['1 2 3 4 13', '1 2 3 3 13', 'valami más', '1 2 3 4 5 14'],
-            good: '1 2 3 4 14',
-        },
-        {
-            'question': 'Mi a program kimenete?',
-            code: `
             #include <stdio.h>
             main()
             {
@@ -318,5 +305,153 @@ export const testQuestions =
             `,
             wrong: ['0', '2', '-1', 'true', 'false', 'egyik sem'],
             good: '1',
-        }
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            void main(){
+                int a;
+                a=1;
+                a++ * ++a;
+                printf("%d",a);
+            }
+            `,
+            wrong: ['0', '1', '2', '4', 'egyik sem'],
+            good: '3',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            void main(){
+                int i=10;
+                printf("%d %d %d",++i, i++, ++i);
+            }
+            `,
+            wrong: ['11 12 13', '11 10 11', '10 12 11', 'egyik sem'],
+            good: '13 11 13',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            const enum Alpha{
+                  X,
+                  Y = 5,
+                  Z
+            } p = 10;
+            int main(){
+                enum Alpha a,b;
+                a = X;
+                b = Z;
+                printf("%d", a + b - p);
+                return 0;
+            }
+            `,
+            wrong: ['-8', '-6', '4', '6', '-2'],
+            good: '-4',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            main()
+            {
+                int i, j, *ptr, *ptr1;
+                i = 10;
+                j = 10;
+                ptr = &i;
+                ptr1 = &j;
+                if(ptr == ptr1)
+                {
+                    printf("True");
+                }
+                else
+                {
+                    printf("False");
+                }
+            }
+            `,
+            wrong: ['True', 'True False', 'semmi'],
+            good: 'False',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+
+            void f1(){
+                int a=0;
+                ++a;
+                printf("%d ",a);
+                }
+
+            main(){
+                int a=10;
+                f1();
+                f1();
+                f1();
+                printf("%d",a);
+                return 0;
+            }
+            `,
+            wrong: ['0 1 1 10', '10 0 1 10', '1 2 3 4', '1 2 3 10'],
+            good: '1 1 1 10',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            main() {
+                auto a;
+                register r;
+                static s;
+                extern e;
+                printf("%d",sizeof a);
+                printf("%d",sizeof r);
+                printf("%d",sizeof s);
+                printf("%d",sizeof e);
+                return 0;
+            }
+            `,
+            wrong: ['4 2 4 4', '2 4 4 2', '2 2 2 2'],
+            good: '4 4 4 4',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+
+            void main(){
+                float a;
+                a=3.7;
+                if(a==3.7)
+                printf("Egyenlo");
+                else
+                printf("Nem egyenlo");
+            }
+            `,
+            wrong: ['egyenlo'],
+            good: 'nem egyenlo',
+        },
+        {
+            'question': 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+
+            void main(){
+                float a;
+                a=3.7;
+                if(a==3.7f)
+                printf("Egyenlo");
+                else
+                printf("Nem egyenlo");
+            }
+            `,
+            wrong: ['nem egyenlo'],
+            good: 'egyenlo',
+        },
     ];
+
+

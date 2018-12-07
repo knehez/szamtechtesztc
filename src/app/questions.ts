@@ -422,6 +422,25 @@ export const testQuestions =
             question: 'Mi a program kimenete?',
             code: `
             #include <stdio.h>
+            main() {
+                auto double a;
+                register r;
+                static char s;
+                extern e;
+                printf("%d",sizeof a);
+                printf("%d",sizeof r);
+                printf("%d",sizeof s);
+                printf("%d",sizeof e);
+                return 0;
+            }
+            `,
+            wrong: ['4 2 4 4', '8 4 1 2', '8 1 1 4'],
+            good: '8 4 1 4',
+        },
+        {
+            question: 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
 
             void main(){
                 float a;
@@ -463,7 +482,7 @@ export const testQuestions =
                 char *const p=str;
                 *p='M';
                 *(p+6) = 'A';
-                printf("%s\n", str);
+                printf("%s", str);
                 return 0;
             }
             `,
@@ -805,7 +824,7 @@ export const testQuestions =
             }
             `,
             wrong: ['-1, 0, 1, 2, 3, 4', '-1, 2, 6, 3, 4, 5', '-1, 0, 6, 2, 3, 4'],
-            good: '-1,0,6,7,8,9',
+            good: '-1, 0, 6, 7, 8, 9',
         },
         {
             question: 'Mi a program kimenete?',
@@ -819,7 +838,7 @@ export const testQuestions =
             }
             `,
             wrong: ['-1, 0, 1, 2, 3, 4', '-1, 2, 6, 3, 4, 5', '-1, 0, 6, 2, 3, 4'],
-            good: '-1,0,6,7,8,9',
+            good: '-1, 0, 6, 7, 8, 9',
         },
     ];
 

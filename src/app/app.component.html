@@ -44,7 +44,7 @@
         </td>
       </tr>
     </table>
-    <table align="center">
+    <table align="center" *ngIf="!randomQuestions[currentQuestionIndex].result">
       <tr>
         <td class="ui table form" style="width:400px;">
           <code><pre [innerHtml]="currentCode"></pre></code>
@@ -58,6 +58,17 @@
             </tr>
           </table>
         </td>
+      </tr>
+    </table>
+    <table align="center" *ngIf="randomQuestions[currentQuestionIndex].result">
+      <tr>
+        <td class="ui table form" style="width:400px;">
+          <textarea [(ngModel)]="codeInput" rows="20" cols="40"></textarea>
+        </td>
+      </tr>
+      <tr align="center">
+        <input type="button" class="ui positive basic button" value="Programkód beküldése" (click)="checkCodeSolution()"
+                  [disabled]="testFinished">
       </tr>
     </table>
     <table align="center">

@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
 
+## Backend indítása
+npm run gulp backend
+
 ## Production build
 
 ./node_modules/@angular/cli/bin/ng build --prod --base-href "/szamtech-teszt-c/"

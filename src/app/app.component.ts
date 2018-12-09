@@ -6,6 +6,8 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/map';
 import Prism from 'prismjs';
+import { codeQuestions } from './codeQuestions';
+import { CompilerService } from './codecompile.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ import Prism from 'prismjs';
 export class AppComponent {
   userName = '';
   testStarted: Boolean = false;
-  questionsInTest = 18;
+  questionsInTest = 10;
   correctAnswers = 0;
   testFinished = false;
   currentQuestionIndex = 0;
@@ -25,6 +27,9 @@ export class AppComponent {
   timerStream;
   countdown = 0;
   randomQuestions = [];
+  codeInput: any;
+
+  constructor(private compilerService: CompilerService) { }
 
   public startTest() {
     if (this.testStarted) {
@@ -34,6 +39,8 @@ export class AppComponent {
     this.testStarted = true;
 
     this.randomQuestions = testQuestions.sort(() => .5 - Math.random());
+    this.randomQuestions = this.randomQuestions.slice(0, 2);
+    this.randomQuestions.push(...codeQuestions.sort(() => .5 - Math.random()));
     console.log('kérdések száma:' + this.randomQuestions.length);
     this.currentQuestionIndex = 0;
     this.setNextQuestions();
@@ -47,10 +54,40 @@ export class AppComponent {
 
   tickerFunc(t) {
     // 60 másodperctől számol vissza
-    this.countdown = 60 * 1000 - t * 1000;
+    const time = this.randomQuestions[this.currentQuestionIndex].time === undefined ?
+      60 : this.randomQuestions[this.currentQuestionIndex].time;
+    this.countdown = time * 1000 - t * 1000;
     if (this.countdown === 0) {
       this.checkSolution(-1);
     }
+  }
+
+  checkCodeSolution() {
+    this.timerStream.unsubscribe();
+    const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
+    const result = this.randomQuestions[this.currentQuestionIndex].result;
+    const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
+
+    const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
+    this.compilerService.compileCode(code).then((res) => {
+      console.log(res);
+      if (JSON.stringify(res) === JSON.stringify(result)) {
+        alert('A válasza helyes');
+        this.correctAnswers++;
+      } else {
+        alert('A válasza helytelen');
+      }
+      if (this.currentQuestionIndex < this.questionsInTest - 1) {
+        this.currentQuestionIndex++;
+        this.setNextQuestions();
+        this.startCountdownTimer();
+      } else {
+        this.testFinished = true;
+        alert('Vége a tesztnek');
+      }
+    }, (err) => {
+      alert(err);
+    });
   }
 
   checkSolution(selectedAnswer: number) {
@@ -78,6 +115,13 @@ export class AppComponent {
   setNextQuestions() {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
+    if (currentQuestion.result === undefined) {
+      this.setupTestQuestion(currentQuestion);
+    }
+  }
+
+
+  setupTestQuestion(currentQuestion) {
     const randomIndices = this.getRandomQuestionIndices(currentQuestion.wrong.length + 1);
     this.currentAnswers[randomIndices[0]] = currentQuestion.good;
     this.currentCorrectAnswer = randomIndices[0];

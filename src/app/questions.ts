@@ -226,6 +226,45 @@ export const testQuestions =
             #include <stdio.h>
             main()
             {
+                int v[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12};
+                printf("%d", v[1][2]);
+            }
+            `,
+            wrong: ['6', '8', '9', '10', '11'],
+            good: '7',
+        },
+        {
+            question: 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            main()
+            {
+                int v[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12};
+                printf("%d", v[0][1]);
+            }
+            `,
+            wrong: ['1', '4', '3', '5', '6'],
+            good: '2',
+        },
+        {
+            question: 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            main()
+            {
+                int v[3][4] = {1,2,3,4,5,6,7,8,9,10,11,12};
+                printf("%d", v[2][1]);
+            }
+            `,
+            wrong: ['6', '7', '8', '5', '1', '2'],
+            good: '10',
+        },
+        {
+            question: 'Mi a program kimenete?',
+            code: `
+            #include <stdio.h>
+            main()
+            {
                 int a = 1;
                 printf("%d", a << 15);
             }

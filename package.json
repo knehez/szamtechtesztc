@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gulp": "gulp"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +23,13 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@ryancavanaugh/prismjs": "^1.4.3-alpha",
+    "compile-run": "^2.1.4",
     "core-js": "^2.4.1",
+    "dotenv": "^6.2.0",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.4.2",
     "prismjs": "^1.15.0",
+    "run-sequence": "^2.2.1",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.14"
   },

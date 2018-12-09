@@ -63,12 +63,18 @@
     <table align="center" *ngIf="randomQuestions[currentQuestionIndex].result">
       <tr>
         <td class="ui table form" style="width:400px;">
-          <textarea [(ngModel)]="codeInput" rows="20" cols="40"></textarea>
+          <div ace-editor
+          [(text)]="codeInput"
+          [mode]="'c_cpp'"
+          [theme]="'eclipse'"
+          [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
+          [readOnly]="false"
+          style="min-height: 300px; width:100%; overflow: hidden;"></div>
         </td>
       </tr>
       <tr align="center">
         <input type="button" class="ui positive basic button" value="Programkód beküldése" (click)="checkCodeSolution()"
-                  [disabled]="testFinished">
+          [disabled]="testFinished">
       </tr>
     </table>
     <table align="center">

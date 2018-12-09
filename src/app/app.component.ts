@@ -8,6 +8,12 @@ import 'rxjs/add/operator/map';
 import Prism from 'prismjs';
 import { codeQuestions } from './codeQuestions';
 import { CompilerService } from './codecompile.service';
+import 'brace/index';
+import 'brace/mode/c_cpp.js';
+import 'brace/theme/eclipse.js';
+import 'brace/ext/language_tools.js';
+import 'brace/snippets/c_cpp.js';
+import 'brace/snippets/text.js';
 
 @Component({
   selector: 'app-root',

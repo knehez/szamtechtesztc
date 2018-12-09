@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CompilerService } from './codecompile.service';
 import { HttpModule } from '@angular/http';
+import { AceEditorModule } from 'ng2-ace-editor';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, FormsModule, HttpModule
+    BrowserModule, FormsModule, HttpModule, AceEditorModule
   ],
   providers: [CompilerService],
   bootstrap: [AppComponent]

@@ -91,7 +91,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
-            question: 'Írjon egy min() nevű függvényt, amely egy 10 elemű int vektor legnagyobb elemének indexét adja vissza.',
+            question: 'Írjon egy max() nevű függvényt, amely egy 10 elemű int vektor legnagyobb elemének indexét adja vissza.',
             testCode: `
             #include <stdio.h>
             main()

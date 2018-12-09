@@ -34,6 +34,7 @@ export class AppComponent {
   countdown = 0;
   randomQuestions = [];
   codeInput: any;
+  compilerOutput = '';
 
   constructor(private compilerService: CompilerService) { }
 
@@ -68,8 +69,19 @@ export class AppComponent {
     }
   }
 
+  checkTestSolution() {
+    const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
+    const result = this.randomQuestions[this.currentQuestionIndex].result;
+    const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
+    const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
+    this.compilerService.compileCode(code).then((res) => {
+      this.compilerOutput = JSON.stringify(res['stderr']).replace('\"', '"').replace('\r\n', '');
+    });
+  }
+
   checkCodeSolution() {
     this.timerStream.unsubscribe();
+    this.compilerOutput = '';
     const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
     const result = this.randomQuestions[this.currentQuestionIndex].result;
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;

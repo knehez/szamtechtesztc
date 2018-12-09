@@ -60,21 +60,25 @@
         </td>
       </tr>
     </table>
-    <table align="center" *ngIf="randomQuestions[currentQuestionIndex].result">
+    <table align="center" *ngIf="randomQuestions[currentQuestionIndex].result" style="width:400px;">
       <tr>
-        <td class="ui table form" style="width:400px;">
-          <div ace-editor
-          [(text)]="codeInput"
-          [mode]="'c_cpp'"
-          [theme]="'eclipse'"
-          [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
-          [readOnly]="false"
-          style="min-height: 300px; width:100%; overflow: hidden;"></div>
+        <td class="ui table form" colspan="2">
+          <div ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'" [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
+            [readOnly]="false" style="min-height: 300px; width:100%; overflow: hidden;"></div>
         </td>
       </tr>
       <tr align="center">
-        <input type="button" class="ui positive basic button" value="Programkód beküldése" (click)="checkCodeSolution()"
-          [disabled]="testFinished">
+        <td>
+          <input type="button" class="ui positive basic button" value="Próba beküldés" (click)="checkTestSolution()"
+            [disabled]="testFinished">
+        </td>
+        <td>
+          <input type="button" class="ui positive basic button" value="Válaszkód beküldése" (click)="checkCodeSolution()"
+            [disabled]="testFinished">
+        </td>
+      </tr>
+      <tr align="center">
+        <td colspan="2" *ngIf="compilerOutput != ''">{{compilerOutput}}</td>
       </tr>
     </table>
     <table align="center">

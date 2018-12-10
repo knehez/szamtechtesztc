@@ -13,7 +13,7 @@ gulp.task('vet-backend', function () {
 gulp.task('clean-backend', function () {
     return del(['./dist-server/backend/**/*', '!dist-server/backend']);
 });
-
+/*
 gulp.task('obfuscate', function (done) {
     exec('javascript-obfuscator ./dist/main.bundle.js --source-map false --debug-protection true --transform-obbject-keys true ' +
         '--identifier-names-generator mangled --string-array true --target browser --self-defending true ' +
@@ -22,7 +22,7 @@ gulp.task('obfuscate', function (done) {
             done();
         });
 });
-
+*/
 gulp.task('compile-backend', function (done) {
     exec('tsc --sourcemap -p ./src/backend', function (err, stdout, stderr) {
         console.log(stdout);

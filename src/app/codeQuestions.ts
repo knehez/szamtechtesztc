@@ -22,7 +22,7 @@ export const codeQuestions =
             time: 2 * 60
         },
         {
-            question: 'Írjon egy atlag() nevű függvényt, amely a paraméterében megadott két' +
+            question: 'Írjon egy atlag() nevű függvényt, amely a paraméterében megadott két ' +
                 'float típusú paraméter értékének átlagát adja vissza.',
             testCode: `
             #include <stdio.h>

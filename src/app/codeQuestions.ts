@@ -69,11 +69,11 @@ export const codeQuestions =
             main()
             {
                 int v[] = {1,2,3,4,5,6,7,8,9,10};
-                printf("%d", max(v));
+                printf("%d", min(v));
             }
             `,
             stdin: '',
-            result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
             time: 3 * 60
         },
         {
@@ -83,7 +83,7 @@ export const codeQuestions =
             main()
             {
                 int v[] = {1,2,3,4,50,6,7,8,9,10};
-                printf("%d", max(v));
+                printf("%d", min(v));
             }
             `,
             stdin: '',

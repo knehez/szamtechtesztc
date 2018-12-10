@@ -8,7 +8,6 @@ export default function setRoutes(app) {
   const compiler = new CompilerCtrl();
 
   router.route('/compiler').post(compiler.compilePost);
-  router.route('/compiler').get(compiler.compileTest);
 
   app.use('/c-compiler-backend', router);
 }

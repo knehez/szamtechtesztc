@@ -75,7 +75,8 @@ export class AppComponent {
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
     const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
     this.compilerService.compileCode(code).then((res) => {
-      this.compilerOutput = JSON.stringify(res['stderr']).replace('\"', '"').replace('\r\n', '');
+      this.compilerOutput = JSON.stringify(res['stderr']).
+        replace(/(.*)[\.c|\.h]:/g, '<br/>[source]:').replace(/\\r\\n/g, '<br \/>');
     });
   }
 
@@ -110,7 +111,7 @@ export class AppComponent {
 
   checkSolution(selectedAnswer: number) {
     this.timerStream.unsubscribe();
-
+    this.compilerOutput = '';
     if (selectedAnswer === this.currentCorrectAnswer) {
       alert('A válasza helyes');
       this.correctAnswers++;

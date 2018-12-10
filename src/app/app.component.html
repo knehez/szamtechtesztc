@@ -27,7 +27,7 @@
   </div>
   <br />
   <div style="text-align:center" *ngIf="testStarted">
-    <h2>Elért eredmény: {{correctAnswers}}/{{questionsInTest}} ({{correctAnswers*100/questionsInTest | number:'1.2-2'
+    <h2>Eredmény: {{correctAnswers}}/{{questionsInTest}} ({{correctAnswers*100/questionsInTest | number:'1.2-2'
       }}%)</h2>
   </div>
   <br />
@@ -35,12 +35,12 @@
     <table align="center">
       <tr>
         <td align="center">
-          <h2><strong>{{currentQuestionIndex+1}}. feladat.</strong></h2>
+          <h2>{{currentQuestionIndex+1}}. feladat </h2>
         </td>
       </tr>
       <tr>
-        <td align="center">
-          <h2>{{randomQuestions[currentQuestionIndex].question}}</h2>
+        <td>
+          <h3>{{randomQuestions[currentQuestionIndex].question}}</h3>
         </td>
       </tr>
     </table>
@@ -60,7 +60,7 @@
         </td>
       </tr>
     </table>
-    <table align="center" *ngIf="randomQuestions[currentQuestionIndex].result" style="width:400px;">
+    <table align="center" style="width:400px;" *ngIf="randomQuestions[currentQuestionIndex].result">
       <tr>
         <td class="ui table form" colspan="2">
           <div ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'" [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
@@ -68,17 +68,19 @@
         </td>
       </tr>
       <tr align="center">
-        <td>
+        <td *ngIf="false">
           <input type="button" class="ui positive basic button" value="Próba beküldés" (click)="checkTestSolution()"
             [disabled]="testFinished">
         </td>
-        <td>
+        <td colspan="2">
           <input type="button" class="ui positive basic button" value="Válaszkód beküldése" (click)="checkCodeSolution()"
             [disabled]="testFinished">
         </td>
       </tr>
-      <tr align="center">
-        <td colspan="2" *ngIf="compilerOutput != ''">{{compilerOutput}}</td>
+      <tr>
+        <td colspan="2" *ngIf="compilerOutput != ''">
+          <pre [innerHtml]="compilerOutput"></pre>
+        </td>
       </tr>
     </table>
     <table align="center">

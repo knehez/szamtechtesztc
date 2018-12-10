@@ -14,6 +14,15 @@ gulp.task('clean-backend', function () {
     return del(['./dist-server/backend/**/*', '!dist-server/backend']);
 });
 
+gulp.task('obfuscate', function (done) {
+    exec('javascript-obfuscator ./dist/main.bundle.js --source-map false --debug-protection true --transform-obbject-keys true ' +
+        '--identifier-names-generator mangled --string-array true --target browser --self-defending true ' +
+        ' --string-array-encoding base64 string-array-threshold 0.99', function (err, stdout, stderr) {
+            console.log(stdout);
+            done();
+        });
+});
+
 gulp.task('compile-backend', function (done) {
     exec('tsc --sourcemap -p ./src/backend', function (err, stdout, stderr) {
         console.log(stdout);
@@ -26,11 +35,11 @@ gulp.task('build-backend', function (done) {
 });
 
 gulp.task('build-backend-no-clean', function (done) {
-    runSequence('vet-backend', 'compile-backend','restart-server', done);
+    runSequence('vet-backend', 'compile-backend', 'restart-server', done);
 });
 
-gulp.task('restart-server', function() {
-    if(stream) {
+gulp.task('restart-server', function () {
+    if (stream) {
         stream.emit('restart', 5);
     }
 });
@@ -45,7 +54,7 @@ gulp.task('backend', ['watch-backend'], function () {
         watch: 'dist-server/backend',
         delay: 1000, // milliseconds
     })
-    .on('restart', function () {
-        console.log('Restarted');
-    });
+        .on('restart', function () {
+            console.log('Restarted');
+        });
 });

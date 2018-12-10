@@ -9,7 +9,6 @@ npm run gulp backend
 ### Hogyan kell a szerverre kitenni a legfrissebb változatot?
 ```
 sudo su
-cd /opt/purdb/
 # ne kérje mindig a passwordot
 git config credential.helper store
 git pull

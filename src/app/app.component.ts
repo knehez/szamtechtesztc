@@ -76,7 +76,7 @@ export class AppComponent {
     const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
     this.compilerService.compileCode(code).then((res) => {
       this.compilerOutput = JSON.stringify(res['stderr']).
-        replace(/(.*)[\.c|\.h]:/g, '<br/>[source]:').replace(/\\r\\n/g, '<br \/>');
+        replace(/\\r\\n/g, '\n').replace(/^.*(\.c|.h):/gm, '[source]').replace(/(\\r\\n|\n)/g, '<br \/>');
     });
   }
 

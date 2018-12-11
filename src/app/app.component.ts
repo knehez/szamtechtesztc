@@ -74,6 +74,10 @@ export class AppComponent {
     return ret;
   }
 
+  tickerFuncProtectResult(t) {
+    this.endResult = this.result + this.randomSpaces();
+  }
+
   tickerFunc(t) {
     this.endResult = this.result + this.randomSpaces();
     // 60 másodperctől számol vissza
@@ -119,6 +123,8 @@ export class AppComponent {
       } else {
         this.testFinished = true;
         alert('Vége a tesztnek');
+        const timer = Observable.timer(0, 1000);
+        this.timerStream = timer.subscribe(t => this.tickerFuncProtectResult(t));
       }
     }, (err) => {
       alert(err);

@@ -23,7 +23,7 @@ import 'brace/snippets/text.js';
 export class AppComponent {
   userName = '';
   testStarted: Boolean = false;
-  questionsInTest = 10;
+  questionsInTest = 9;
   correctAnswers = 0;
   testFinished = false;
   currentQuestionIndex = 0;
@@ -35,8 +35,14 @@ export class AppComponent {
   randomQuestions = [];
   codeInput: any;
   compilerOutput = '';
+  endResult = '';
 
   constructor(private compilerService: CompilerService) { }
+
+  get result(): string {
+    return 'Eredmény: ' + this.correctAnswers + '/' + this.questionsInTest +
+      ' (' + (this.correctAnswers * 100 / this.questionsInTest).toPrecision(2) + '%)';
+  }
 
   public startTest() {
     if (this.testStarted) {
@@ -59,7 +65,17 @@ export class AppComponent {
     this.timerStream = timer.subscribe(t => this.tickerFunc(t));
   }
 
+  randomSpaces() {
+    const n = Math.floor((Math.random() * 10) + 1);
+    let ret = '';
+    for (let i = 0; i < n; i++) {
+      ret += ' ';
+    }
+    return ret;
+  }
+
   tickerFunc(t) {
+    this.endResult = this.result + this.randomSpaces();
     // 60 másodperctől számol vissza
     const time = this.randomQuestions[this.currentQuestionIndex].time === undefined ?
       60 : this.randomQuestions[this.currentQuestionIndex].time;

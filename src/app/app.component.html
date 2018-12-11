@@ -27,8 +27,7 @@
   </div>
   <br />
   <div style="text-align:center" *ngIf="testStarted">
-    <h2>Eredmény: {{correctAnswers}}/{{questionsInTest}} ({{correctAnswers*100/questionsInTest | number:'1.2-2'
-      }}%)</h2>
+    <h2>{{endResult}}</h2>
   </div>
   <br />
   <div *ngIf="testStarted">

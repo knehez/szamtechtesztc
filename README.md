@@ -34,6 +34,12 @@ Ez a sor azért kell hogy kézzel is le lehessen futtatni a lokálisan installá
 
     npm link javascript-obfuscator
 
+    ./node_modules/javascript-obfuscator/bin/javascript-obfuscator [ide jön a dist/main-bundle.js]
+
+    source-map false --debug-protection true --transform-obbject-keys true --identifier-names-generator mangled --string-array true --target browser --self-defending true --string-array-encoding base64 string-array-threshold 0.99
+
+Az obfuscated file átmozgatása.
+
 Gulp task a kódkeveréshez, majd az új állomány visszaírás
     npm run gulp obfuscate
     mv .\dist\main-obfuscated.bundle.js .\dist\main.bundle.js

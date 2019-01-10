@@ -1,0 +1,13 @@
+[Unit]
+Description=Szamtech c-compiler nodejs backend
+After=mongod.service
+[Service]
+PIDFile=/tmp/szamtech_backend.pid
+User=www-data
+Group=www-data
+Restart=always
+KillSignal=SIGQUIT
+WorkingDirectory=/opt/szamtech-teszt-c/
+ExecStart=/usr/bin/node ./dist-server/app.js 3003 c-compiler
+[Install]
+WantedBy=multi-user.target

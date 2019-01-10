@@ -22,9 +22,9 @@ majd a backend indítása a hagyományos módon, ami azért kell, hogy a .ts fil
 
     npm run gulp backend
 
-Majd le kell állítani ctrl+c vel és ps-ben is megnézni hogy ne fusson:
+Majd újra kell indítani a backend szolgáltatást:
 
-    nohup node ./dist-server/app.js 3003 c-compiler &
+    service szamtech restart
 
 ## Kód összezavarás
 

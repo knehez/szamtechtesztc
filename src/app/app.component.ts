@@ -164,7 +164,7 @@ export class AppComponent {
         //
         const trimmedFirstLine = currentQuestion.initialCode;
         const numberOfWhiteSpaces = trimmedFirstLine.split('\n')[1].search(/\S/);
-        this.codeInput = trimmedFirstLine.split('\n').map(t => t.substring(numberOfWhiteSpaces)).join('\n');
+        this.codeInput = trimmedFirstLine.split('\n').map(t => t.substring(numberOfWhiteSpaces)).join('\n').trim();
       }
     }
   }

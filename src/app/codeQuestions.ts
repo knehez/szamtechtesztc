@@ -1,7 +1,9 @@
 export const codeQuestions =
     [
+        //
+        // LEVEL 1 - szintaktika gyakorlása
+        //
         {
-            // szintaktikai gyakrolás
             level: 1,
             question: `Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
                         de nem működik. Javítsa ki, mert több elírás is történt!`,
@@ -20,9 +22,8 @@ export const codeQuestions =
             time: 1 * 60
         },
         {
-            // szintaktikai gyakrolás
             level: 1,
-            question: 'Az alábbi program 10-es írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt!',
+            question: 'Az alábbi program 10-et írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt!',
             testCode: '',
             initialCode: `
             #include "stdio"
@@ -43,6 +44,13 @@ export const codeQuestions =
             level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám összegét írja ki a kimenetre.',
             testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
             stdin: '-5\n8',
             result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
             time: 2 * 60
@@ -51,6 +59,13 @@ export const codeQuestions =
             level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám különbségét írja ki a kimenetre.',
             testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
             stdin: '10\n5',
             result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
             time: 2 * 60
@@ -59,6 +74,13 @@ export const codeQuestions =
             level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám szorzatát írja ki a kimenetre.',
             testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
             stdin: '5\n8',
             result: { 'stderr': '', 'stdout': '40', 'exitCode': 0 },
             time: 2 * 60
@@ -67,6 +89,13 @@ export const codeQuestions =
             level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két lebegőpontos szám hányadosát írja ki a kimenetre.',
             testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
             stdin: '5.9\n8.3',
             result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
             time: 2 * 60
@@ -140,12 +169,12 @@ export const codeQuestions =
             #include <stdio.h>
             main()
             {
-                int v[] = {1,2,3,4,50,6,7,8,9,10};
+                int v[] = {1,2,3,4,-50,6,7,8,9,10};
                 printf("%d", min(v));
             }
             `,
             stdin: '',
-            result: { 'stderr': '', 'stdout': '0', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
             time: 3 * 60
         },
         {

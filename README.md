@@ -15,8 +15,12 @@ git config credential.helper store
 git pull
 ./node_modules/@angular/cli/bin/ng build --prod --no-sourcemap --base-href "/szamtech-teszt-c/"
 ```
-ha a backend kód változott akkor először kill-el ni kell a futó folyamatot: 
+ha a backend kód változott akkor először le kell állítani a futó szolgáltatást: 
 
+    service szamtech stop
+
+(megjegyzés: a szolgáltatás a háttérben így nézhető meg, hogy fut-e?)    
+    
     ps -aux | grep c-compiler
 
 majd a backend indítása a hagyományos módon, ami azért kell, hogy a .ts file-okat lefordítsuk .js-re:

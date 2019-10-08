@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { testQuestions } from './questions';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
@@ -23,7 +23,7 @@ import 'brace/snippets/text.js';
 export class AppComponent {
   userName = '';
   testStarted: Boolean = false;
-  questionsInTest = 9;
+  questionsInTest = 0;
   correctAnswers = 0;
   testFinished = false;
   currentQuestionIndex = 0;
@@ -36,11 +36,12 @@ export class AppComponent {
   codeInput: any;
   compilerOutput = '';
   endResult = '';
+  @ViewChild('editor') codeEditor;
 
   constructor(private compilerService: CompilerService) { }
 
   get result(): string {
-    return 'Eredmény: ' + this.correctAnswers + '/' + this.questionsInTest +
+    return (this.testFinished ? 'Végeredmény: ' : 'Részeredmény: ') + this.correctAnswers + '/' + this.questionsInTest +
       ' (' + (this.correctAnswers * 100 / this.questionsInTest).toPrecision(2) + '%)';
   }
 
@@ -51,10 +52,24 @@ export class AppComponent {
     }
     this.testStarted = true;
 
-    this.randomQuestions = testQuestions.sort(() => .5 - Math.random());
+    // gyors tesztelési célból a level = -1 kérdést kérdezzük először
+    const quickTestQuestion = codeQuestions.filter(o => o.level === -1);
+    if (quickTestQuestion.length === 1) {
+      this.randomQuestions.push(...quickTestQuestion);
+    }
+    // véletlenszerűen kivesszük az összes kérdést
+    this.randomQuestions.push(...testQuestions.sort(() => .5 - Math.random()));
+    // az első kettőt meghagyjuk a többit levágjuk
     this.randomQuestions = this.randomQuestions.slice(0, 2);
-    this.randomQuestions.push(...codeQuestions.sort(() => .5 - Math.random()));
+    const maxLevel = Math.max.apply(Math, codeQuestions.map(function (o) { return o.level; }));
+    // minden szintből 1-et választunk véletlenszerűen
+    for (let i = 1; i <= maxLevel; i++) {
+      // egyes szintekhez tartozó feladatokat sorba rendezzük és 1-et kiválasztunk belőlük
+      this.randomQuestions.push(...codeQuestions.filter(o => o.level === i).sort(() => .5 - Math.random()).slice(0, 1));
+    }
+    // this.randomQuestions.push(...codeQuestions.sort(() => .5 - Math.random()));
     console.log('kérdések száma:' + this.randomQuestions.length);
+    this.questionsInTest = this.randomQuestions.length;
     this.currentQuestionIndex = 0;
     this.setNextQuestions();
     this.startCountdownTimer();
@@ -63,30 +78,6 @@ export class AppComponent {
   startCountdownTimer() {
     const timer = Observable.timer(0, 1000);
     this.timerStream = timer.subscribe(t => this.tickerFunc(t));
-  }
-
-  randomSpaces() {
-    const n = Math.floor((Math.random() * 10) + 1);
-    let ret = '';
-    for (let i = 0; i < n; i++) {
-      ret += ' ';
-    }
-    return ret;
-  }
-
-  tickerFuncProtectResult(t) {
-    this.endResult = this.result + this.randomSpaces();
-  }
-
-  tickerFunc(t) {
-    this.endResult = this.result + this.randomSpaces();
-    // 60 másodperctől számol vissza
-    const time = this.randomQuestions[this.currentQuestionIndex].time === undefined ?
-      60 : this.randomQuestions[this.currentQuestionIndex].time;
-    this.countdown = time * 1000 - t * 1000;
-    if (this.countdown === 0) {
-      this.checkSolution(-1);
-    }
   }
 
   checkTestSolution() {
@@ -104,19 +95,24 @@ export class AppComponent {
     this.timerStream.unsubscribe();
     this.compilerOutput = '';
     const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
-    const result = this.randomQuestions[this.currentQuestionIndex].result;
+    const userSolution = this.randomQuestions[this.currentQuestionIndex].result;
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
 
     const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
-    this.compilerService.compileCode(code).then((res) => {
-      console.log(res);
-      if (JSON.stringify(res) === JSON.stringify(result)) {
+    this.compilerService.compileCode(code).then((solution: any) => {
+      console.log(solution);
+      // solution is OK whether these 3 properties are equuals
+      // { 'stderr': '', 'stdout': 'xxxx', 'exitCode': 0 },
+      if (solution.stderr === userSolution.stderr &&
+        solution.stdout === userSolution.stdout &&
+        solution.exitCode === userSolution.exitCode) {
         alert('A válasza helyes');
         this.correctAnswers++;
       } else {
         alert('A válasza helytelen');
       }
       if (this.currentQuestionIndex < this.questionsInTest - 1) {
+        this.codeInput = '';
         this.currentQuestionIndex++;
         this.setNextQuestions();
         this.startCountdownTimer();
@@ -156,11 +152,22 @@ export class AppComponent {
   setNextQuestions() {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
+    // egyszerű feleltválasztós teszt
     if (currentQuestion.result === undefined) {
       this.setupTestQuestion(currentQuestion);
+    } else {
+      if (currentQuestion.initialCode !== undefined) {
+        // Ha van a kérdésben kódrészlet, akkor formázni kell:
+        //
+        // megnézzük hány üres karakter van a második sor előtt?
+        // amennyi van annyit veszünk el minden sor elejéből
+        //
+        const trimmedFirstLine = currentQuestion.initialCode;
+        const numberOfWhiteSpaces = trimmedFirstLine.split('\n')[1].search(/\S/);
+        this.codeInput = trimmedFirstLine.split('\n').map(t => t.substring(numberOfWhiteSpaces)).join('\n');
+      }
     }
   }
-
 
   setupTestQuestion(currentQuestion) {
     const randomIndices = this.getRandomQuestionIndices(currentQuestion.wrong.length + 1);
@@ -178,5 +185,29 @@ export class AppComponent {
       questionIndices.push(i);
     }
     return questionIndices.sort(() => .5 - Math.random());
+  }
+
+  randomSpaces() {
+    const n = Math.floor((Math.random() * 10) + 1);
+    let ret = '';
+    for (let i = 0; i < n; i++) {
+      ret += ' ';
+    }
+    return ret;
+  }
+
+  tickerFuncProtectResult(t) {
+    this.endResult = this.result + this.randomSpaces();
+  }
+
+  tickerFunc(t) {
+    this.endResult = this.result + this.randomSpaces();
+    // 60 másodperctől számol vissza
+    const time = this.randomQuestions[this.currentQuestionIndex].time === undefined ?
+      60 : this.randomQuestions[this.currentQuestionIndex].time;
+    this.countdown = time * 1000 - t * 1000;
+    if (this.countdown === 0) {
+      this.checkSolution(-1);
+    }
   }
 }

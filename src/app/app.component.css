@@ -1,0 +1,14 @@
+.small-divider {
+    margin-top: 0.5em;
+}
+
+.big-divider {
+    margin-top: 15em;
+}
+
+.center {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

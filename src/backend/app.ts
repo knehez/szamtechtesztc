@@ -24,7 +24,7 @@ app.get('/*', function (req, res) {
 
 app.listen(app.get('port'), () => {
   process.stdout.write('Angular Full Stack listening on port ' + app.get('port') + '\n');
-  process.stdout.write('Compiler started\n');
+  process.stdout.write('Compiler backend started, waiting for code submissions.\n');
 });
 
 

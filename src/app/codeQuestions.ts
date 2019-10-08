@@ -1,6 +1,46 @@
 export const codeQuestions =
     [
         {
+            // szintaktikai gyakrolás
+            level: 1,
+            question: `Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
+                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                for(int i = 0; o < 10; i++) {
+                    printf("%d", i)
+                }
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': '0123456789', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            // szintaktikai gyakrolás
+            level: 1,
+            question: 'Az alábbi program 10-es írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt!',
+            testCode: '',
+            initialCode: `
+            #include "stdio"
+            main()
+            {
+                int a = 10;
+                print("%d", a);
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        //
+        // LEVEL 2
+        //
+        {
+            level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám összegét írja ki a kimenetre.',
             testCode: '',
             stdin: '-5\n8',
@@ -8,6 +48,7 @@ export const codeQuestions =
             time: 2 * 60
         },
         {
+            level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám különbségét írja ki a kimenetre.',
             testCode: '',
             stdin: '10\n5',
@@ -15,6 +56,7 @@ export const codeQuestions =
             time: 2 * 60
         },
         {
+            level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám szorzatát írja ki a kimenetre.',
             testCode: '',
             stdin: '5\n8',
@@ -22,6 +64,18 @@ export const codeQuestions =
             time: 2 * 60
         },
         {
+            level: 2,
+            question: 'Írjon egy C programot, amely a billentyűzetről bekért két lebegőpontos szám hányadosát írja ki a kimenetre.',
+            testCode: '',
+            stdin: '5.9\n8.3',
+            result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        //
+        // LEVEL 3
+        //
+        {
+            level: 3,
             question: 'Írjon egy atlag() nevű függvényt, amely a paraméterében megadott két ' +
                 'float típusú paraméter értékének átlagát adja vissza.',
             testCode: `
@@ -35,6 +89,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy atlag() nevű függvényt, amely egy 10 elemű int vektor átlagát adja vissza.',
             testCode: `
             #include <stdio.h>
@@ -49,6 +104,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy max() nevű függvényt, amely egy 10 elemű int vektor legnagyobb elemének értékét adja vissza.',
             testCode: `
             #include <stdio.h>
@@ -63,6 +119,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy min() nevű függvényt, amely egy 10 elemű int vektor legkisebb elemének értékét adja vissza.',
             testCode: `
             #include <stdio.h>
@@ -77,6 +134,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy min() nevű függvényt, amely egy 10 elemű int vektor legkisebb elemének indexét adja vissza.',
             testCode: `
             #include <stdio.h>
@@ -91,6 +149,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy max() nevű függvényt, amely egy 10 elemű int vektor legnagyobb elemének indexét adja vissza.',
             testCode: `
             #include <stdio.h>
@@ -105,6 +164,7 @@ export const codeQuestions =
             time: 3 * 60
         },
         {
+            level: 3,
             question: 'Írjon egy fordit() nevű függvényt, amely egy 5 elemű int vektor elemeit megfordítja.',
             testCode: `
             #include <stdio.h>
@@ -120,9 +180,15 @@ export const codeQuestions =
             result: { 'stderr': '', 'stdout': '54321', 'exitCode': 0 },
             time: 3 * 60
         },
+        //
+        // LEVEL 4
+        //
         {
-            question: `Írjon egy kiszed(char* input, char *output) nevű függvényt, amely az input szövegből kiveszi
-                        az 'a' és 'e' betűket és az outputba kerül az eredmény.`,
+            // sztring kezelés
+            level: 4,
+            question: `Írjon egy kiszed(char* input, char *output) nevű függvényt,
+                       amely az input vektorban megadott szövegből kiveszi
+                       az 'a' és 'e' betűket és az output verktorba kerül az eredmény.`,
             testCode: `
             #include <stdio.h>
             #include <stdlib.h>
@@ -135,7 +201,21 @@ export const codeQuestions =
             }
             `,
             stdin: '',
-            result: { 'stderr': '', 'stdout': 'lm', 'exitCode': 0 },
+            solution: `
+            kiszed(char* input, char *output)
+            {
+                while(*input != '\0')
+                {
+                    if(*input == 'a' || *input == 'e')
+                    {
+                        *output = *input;
+                        output++;
+                    }
+                    input++;
+                }
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'aae', 'exitCode': 0 },
             time: 3 * 60
         },
     ];

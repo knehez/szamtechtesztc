@@ -1,9 +1,10 @@
-# Szamtech Teszt
+# Szamtech C programozás teszt
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
+## Frontend indítása (fejlesztés közben)
+    npm run start
 
-## Backend indítása
-npm run gulp backend
+## Backend indítása (fejlesztés közben)
+    npm run gulp backend
 
 
 ### Hogyan kell a szerverre kitenni a legfrissebb változatot?

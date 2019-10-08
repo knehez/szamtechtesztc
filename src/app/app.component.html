@@ -1,14 +1,14 @@
 <div class="ui container main">
   <div style="text-align:center">
-    <h1>
-      Számítástechnika C nyelvű teszt - tárgykód: GEIAK201-B
-    </h1>
-    <h2>I. évfolyamos BG, BJ, BM, BMR, BS és BV szakos BSc hallgatók részére</h2>
-    <h2>Miskolci Egyetem - Alkalmazott Informatikai Tanszéke</h2>
-    <h1></h1>
+    <h1>Miskolci Egyetem - Informatikai Intézet - Alkalmazott Informatikai Tanszék</h1>
+    <h2>
+      Számítástechnika C nyelv alap szintű teszt
+    </h2>
+    <h3>I. évfolyamos BG, BJ, BM, BMR, BS és BV szakos BSc hallgatók részére</h3>
+    <h5>tárgykódok: GEIAK201-B, GEIAK201B, GEIAK201-BL, GEIAK201BL</h5>
   </div>
-  <div>
-    <table class="ui table form" style="width:600px; margin-left: auto; margin-right: auto;">
+  <div class="big-divider" *ngIf="!testStarted">
+    <table class="ui table form center">
       <tr>
         <td>
           <h3>Kérem írja be a nevét</h3>
@@ -25,12 +25,12 @@
       </tr>
     </table>
   </div>
-  <br />
-  <div style="text-align:center" *ngIf="testStarted">
-    <h2>{{endResult}}</h2>
-  </div>
-  <br />
-  <div *ngIf="testStarted">
+  <h2 class="center" *ngIf="this.testFinished">Vége a tesztnek <b>{{userName}}</b>.</h2>
+  <h2 class="small-divider center" [ngStyle]="{color: this.testFinished ? 'red' : 'green'}"
+    style="border: 2px solid #eeeeee;" *ngIf="testStarted">
+    {{endResult}}
+  </h2>
+  <div *ngIf="testStarted && !this.testFinished">
     <table align="center">
       <tr>
         <td align="center">
@@ -62,8 +62,9 @@
     <table align="center" style="width:400px;" *ngIf="randomQuestions[currentQuestionIndex].result">
       <tr>
         <td class="ui table form" colspan="2">
-          <div ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'" [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
-            [readOnly]="false" style="min-height: 300px; width:100%; overflow: hidden;"></div>
+          <ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'"
+            [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
+            [readOnly]="false" style="min-height: 300px; width:100%; overflow: hidden;"></ace-editor>
         </td>
       </tr>
       <tr align="center">
@@ -72,8 +73,8 @@
             [disabled]="testFinished">
         </td>
         <td colspan="2">
-          <input type="button" class="ui positive basic button" value="Válaszkód beküldése" (click)="checkCodeSolution()"
-            [disabled]="testFinished">
+          <input type="button" class="ui positive basic button" value="Válaszkód beküldése"
+            (click)="checkCodeSolution()" [disabled]="testFinished">
         </td>
       </tr>
       <tr>

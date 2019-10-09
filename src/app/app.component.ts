@@ -58,9 +58,9 @@ export class AppComponent {
       this.randomQuestions.push(...quickTestQuestion);
     }
     // véletlenszerűen kivesszük az összes kérdést
-    this.randomQuestions.push(...testQuestions.sort(() => .5 - Math.random()));
+    // this.randomQuestions.push(...testQuestions.sort(() => .5 - Math.random()));
     // az első kettőt meghagyjuk a többit levágjuk
-    this.randomQuestions = this.randomQuestions.slice(0, 2);
+    // this.randomQuestions = this.randomQuestions.slice(0, 2);
     const maxLevel = Math.max.apply(Math, codeQuestions.map(function (o) { return o.level; }));
     // minden szintből 1-et választunk véletlenszerűen
     for (let i = 1; i <= maxLevel; i++) {

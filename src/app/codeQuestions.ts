@@ -5,6 +5,24 @@ export const codeQuestions =
         //
         {
             level: 1,
+            question: `Új feladat. Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
+                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                for(int i = 0; o < 10; i++) {
+                    printf("%d", i)
+                }
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': '0123456789', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
             question: `Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
                         de nem működik. Javítsa ki, mert több elírás is történt!`,
             testCode: '',

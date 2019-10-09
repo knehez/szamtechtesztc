@@ -199,7 +199,7 @@ export class AppComponent {
     const config = new TemplateModalConfig<IContext, string, string>(this.modalTemplate);
     config.context = { data: title };
     config.isClosable = false;
-    config.size = 'tiny';
+    config.size = 'small';
     this.modalService.open(config).onApprove(callbackFunction).onDeny(callbackFunction);
   }
 }

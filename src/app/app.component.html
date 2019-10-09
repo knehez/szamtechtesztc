@@ -43,23 +43,7 @@
         </td>
       </tr>
     </table>
-    <table align="center" *ngIf="!randomQuestions[currentQuestionIndex].result">
-      <tr>
-        <td class="ui table form" style="width:400px;">
-          <code><pre [innerHtml]="currentCode"></pre></code>
-        </td>
-        <td>
-          <table align="center" class="ui table form" style="width:300px;">
-            <tr *ngFor="let answer of currentAnswers; let i=index">
-              <td style="font-size: 1.3em;padding:0 15px 0 15px;width:60%" [innerHtml]="answer"></td>
-              <td><input type="button" class="ui positive  basic button" value="Ez a helyes" (click)="checkSolution(i)"
-                  [disabled]="testFinished"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-    <table align="center" style="width:600px;" *ngIf="randomQuestions[currentQuestionIndex].result">
+    <table align="center" style="width:600px;">
       <tr>
         <td class="ui table form" colspan="2">
           <ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'"
@@ -85,4 +69,10 @@
     </table>
     <h3 class="small-divider center">Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
   </div>
+  <ng-template let-context let-modal="modal" #modalTemplate>
+    <div class="header">{{ context.data }}</div>
+    <div class="actions">
+      <button class="ui green button" (click)="modal.approve('done')" autofocus>OK</button>
+    </div>
+  </ng-template>
 </div>

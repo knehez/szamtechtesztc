@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/finally';
@@ -13,6 +13,11 @@ import 'brace/theme/eclipse.js';
 import 'brace/ext/language_tools.js';
 import 'brace/snippets/c_cpp.js';
 import 'brace/snippets/text.js';
+import { ModalTemplate, SuiModalService, TemplateModalConfig } from 'ng2-semantic-ui';
+
+export interface IContext {
+  data: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -35,8 +40,10 @@ export class AppComponent {
   codeInput: any;
   compilerOutput = '';
   endResult = '';
+  @ViewChild('modalTemplate')
+  public modalTemplate: ModalTemplate<IContext, string, string>;
 
-  constructor(private compilerService: CompilerService) { }
+  constructor(private compilerService: CompilerService, private modalService: SuiModalService) { }
 
   get result(): string {
     return (this.testFinished ? 'Végeredmény: ' : 'Részeredmény: ') + this.correctAnswers + '/' + this.questionsInTest +
@@ -45,7 +52,7 @@ export class AppComponent {
 
   public startTest() {
     if (this.testStarted) {
-      alert('A teszt már elindult, nem lehet újra indítani. \n Újrakezdéshez frissítse a lapot.');
+      this.showDialog('A teszt már elindult, nem lehet újra indítani. </br> Újrakezdéshez frissítse a lapot.', () => {});
       return;
     }
     this.testStarted = true;
@@ -66,10 +73,10 @@ export class AppComponent {
       this.randomQuestions.push(...codeQuestions.filter(o => o.level === i).sort(() => .5 - Math.random()).slice(0, 1));
     }
     // this.randomQuestions.push(...codeQuestions.sort(() => .5 - Math.random()));
-    console.log('kérdések száma:' + this.randomQuestions.length);
+
     this.questionsInTest = this.randomQuestions.length;
     this.currentQuestionIndex = 0;
-    this.setNextQuestions();
+    this.setUpNextQuestion();
     this.startCountdownTimer();
   }
 
@@ -80,7 +87,6 @@ export class AppComponent {
 
   checkTestSolution() {
     const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
-    const result = this.randomQuestions[this.currentQuestionIndex].result;
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
     const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
     this.compilerService.compileCode(code).then((res) => {
@@ -98,56 +104,36 @@ export class AppComponent {
 
     const code = { source: this.codeInput + '\n' + testCode, stdin: stdin };
     this.compilerService.compileCode(code).then((solution: any) => {
-      console.log(solution);
       // solution is OK whether these 3 properties are equuals
-      // { 'stderr': '', 'stdout': 'xxxx', 'exitCode': 0 },
+      // sample solution from the backend: { 'stderr': '', 'stdout': 'xxxx', 'exitCode': 0 },
       if (solution.stderr === userSolution.stderr &&
         solution.stdout === userSolution.stdout &&
         solution.exitCode === userSolution.exitCode) {
-        alert('A válasza helyes');
+        this.showDialog('A válasza helyes', () => { this.goNextQuestion(); });
         this.correctAnswers++;
       } else {
-        alert('A válasza helytelen');
-      }
-      if (this.currentQuestionIndex < this.questionsInTest - 1) {
-        this.codeInput = '';
-        this.currentQuestionIndex++;
-        this.setNextQuestions();
-        this.startCountdownTimer();
-      } else {
-        this.testFinished = true;
-        alert('Vége a tesztnek');
-        const timer = Observable.timer(0, 1000);
-        this.timerStream = timer.subscribe(t => this.tickerFuncProtectResult(t));
+        this.showDialog('A válasza helytelen', () => { this.goNextQuestion(); });
       }
     }, (err) => {
-      alert(err);
+      this.showDialog(err, () => {});
     });
   }
 
-  checkSolution(selectedAnswer: number) {
-    this.timerStream.unsubscribe();
-    this.compilerOutput = '';
-    if (selectedAnswer === this.currentCorrectAnswer) {
-      alert('A válasza helyes');
-      this.correctAnswers++;
-    } else if (selectedAnswer !== -1) {
-      alert('A válasza helytelen');
-    } else {
-      alert('Az idő sajnos lejárt.');
-    }
-
+  goNextQuestion() {
     if (this.currentQuestionIndex < this.questionsInTest - 1) {
+      this.codeInput = '';
       this.currentQuestionIndex++;
-      this.setNextQuestions();
+      this.setUpNextQuestion();
       this.startCountdownTimer();
     } else {
       this.testFinished = true;
-      alert('Vége a tesztnek');
+      this.showDialog('Vége a tesztnek', () => {});
+      const timer = Observable.timer(0, 1000);
+      this.timerStream = timer.subscribe(t => this.tickerFuncProtectResult(t));
     }
   }
 
-  setNextQuestions() {
+  setUpNextQuestion() {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
     // egyszerű feleltválasztós teszt
@@ -205,7 +191,15 @@ export class AppComponent {
       60 : this.randomQuestions[this.currentQuestionIndex].time;
     this.countdown = time * 1000 - t * 1000;
     if (this.countdown === 0) {
-      this.checkSolution(-1);
+      this.checkCodeSolution();
     }
+  }
+
+  showDialog(title: string, callbackFunction: any) {
+    const config = new TemplateModalConfig<IContext, string, string>(this.modalTemplate);
+    config.context = { data: title };
+    config.isClosable = false;
+    config.size = 'tiny';
+    this.modalService.open(config).onApprove(callbackFunction).onDeny(callbackFunction);
   }
 }

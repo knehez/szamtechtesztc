@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { CompilerService } from './codecompile.service';
 import { HttpModule } from '@angular/http';
 import { AceEditorModule } from 'ng2-ace-editor';
+import { SuiModule } from 'ng2-semantic-ui';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, FormsModule, HttpModule, AceEditorModule
+    BrowserModule, FormsModule, HttpModule, AceEditorModule, SuiModule
   ],
   providers: [CompilerService],
   bootstrap: [AppComponent]

@@ -59,11 +59,11 @@
         </td>
       </tr>
     </table>
-    <table align="center" style="width:400px;" *ngIf="randomQuestions[currentQuestionIndex].result">
+    <table align="center" style="width:600px;" *ngIf="randomQuestions[currentQuestionIndex].result">
       <tr>
         <td class="ui table form" colspan="2">
           <ace-editor [(text)]="codeInput" [mode]="'c_cpp'" [theme]="'eclipse'"
-            [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false}"
+            [options]="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: false, fontSize: 16}"
             [readOnly]="false" style="min-height: 300px; width:100%; overflow: hidden;"></ace-editor>
         </td>
       </tr>
@@ -73,8 +73,8 @@
             [disabled]="testFinished">
         </td>
         <td colspan="2">
-          <input type="button" class="ui positive basic button" value="Válaszkód beküldése"
-            (click)="checkCodeSolution()" [disabled]="testFinished">
+          <input type="button" class="ui positive basic button" value="Válasz beküldés" (click)="checkCodeSolution()"
+            [disabled]="testFinished">
         </td>
       </tr>
       <tr>
@@ -83,12 +83,6 @@
         </td>
       </tr>
     </table>
-    <table align="center">
-      <tr>
-        <td>
-          <h3>Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
-        </td>
-      </tr>
-    </table>
+    <h3 class="small-divider center">Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
   </div>
 </div>

@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { testQuestions } from './questions';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/finally';
@@ -36,7 +35,6 @@ export class AppComponent {
   codeInput: any;
   compilerOutput = '';
   endResult = '';
-  @ViewChild('editor') codeEditor;
 
   constructor(private compilerService: CompilerService) { }
 

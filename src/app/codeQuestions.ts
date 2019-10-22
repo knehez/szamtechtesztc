@@ -5,6 +5,53 @@ export const codeQuestions =
         //
         {
             level: 1,
+            question: `Az alábbi program kiírná hogy a beolvasott szám páros vagy páratlan,
+                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            int main()
+			{
+				char c1;
+				printf("karakter:");
+				scanf("%c",&c1);
+				fi( c1 >= 'a' & c1 <= 'z'){
+					printf("kisbetu");
+				} else if( c1 >= "A" && c1 <= "Z"){
+					printf("nagy betu");
+				} else if( c1 >= '0' && c1 <= '9') {
+					printf('szamjegy');
+				} else {
+					printf("mas karakter\n");
+				}
+			}
+            `,
+            stdin: 'F',
+            result: { 'stderr': '', 'stdout': 'nagy betu', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
+            question: `Az alábbi program kiírná hogy a beolvasott szám páros vagy páratlan,
+                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int szam;
+				scanf("&d", szam);
+				if(szam %2 = 0) printf("paros");
+				else printf("paratlan");
+            }
+            `,
+            stdin: '9',
+            result: { 'stderr': '', 'stdout': 'paratlan', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
             question: `Új feladat. Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
                         de nem működik. Javítsa ki, mert több elírás is történt!`,
             testCode: '',
@@ -58,6 +105,51 @@ export const codeQuestions =
         //
         // LEVEL 2
         //
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokből.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '3',
+            result: { 'stderr': '', 'stdout': '***\n***\n***', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely összeadja a számokat n-ig és kiírja az eredményt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '9',
+            result: { 'stderr': '', 'stdout': '45', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely kiírja kettő hatványait 2048-al bezárólag.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': '2 4 8 16 32 64 128 256 512 1024 2048 ', 'exitCode': 0 },
+            time: 2 * 60
+        },
         {
             level: 2,
             question: 'Írjon egy C programot, amely a billentyűzetről bekért két egész szám összegét írja ki a kimenetre.',

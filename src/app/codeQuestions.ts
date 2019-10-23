@@ -102,9 +102,61 @@ export const codeQuestions =
             result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
             time: 1 * 60
         },
+        {
+            level: 1,
+            question: 'Az alábbi program beolvas 5 számot, majd meghatározza a legnagyobbat és kiírjatja, hogy hanyadikként olvastuk be.',
+            testCode: '',
+            initialCode: `
+            #include "stdio"
+            main()
+			{
+				int szamok[5], maxindex=0;
+				for(int i=0; i<5; i+){
+					scanf("%d",&szamok[i])
+					if (i!=0){
+						maxindex = szamok[maxindex] < szamok[i] ? maxindex : i;
+					}
+				}
+				printf("%d/n", maxindex);
+			}
+            `,
+            stdin: '0\n1\n2\n3\n4\n',
+            result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
+            time: 1 * 60
+        },
         //
         // LEVEL 2
         //
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely beolvas 5 valós számot egy tömbbe és kiíratja a legnagyobb elemének az értéket.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '10\n1\n7\n9\n3\n',
+            result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely beolvas 10 valós számot és kiíratja azokat a beolvasással ellentétes sorrendben.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n',
+            result: { 'stderr': '', 'stdout': '9\n8\n7\n6\n5\n4\n3\n2\n1\n0', 'exitCode': 0 },
+            time: 2 * 60
+        },
         {
             level: 2,
             question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokből.',
@@ -213,6 +265,20 @@ export const codeQuestions =
         //
         // LEVEL 3
         //
+        {
+            level: 3,
+            question: 'Írjon egy oszthato() nevű függvényt, amely átvesz egy tömböt és visszaadja hány darab 3-mal osztható van benne.',
+            testCode: `
+            #include <stdio.h>
+            main() {
+                int v[] = {1,2,3,4,5,6,7,8,9,10};
+                printf("%d", oszthato(v));
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
+            time: 3 * 60
+        },
         {
             level: 3,
             question: 'Írjon egy atlag() nevű függvényt, amely a paraméterében megadott két ' +

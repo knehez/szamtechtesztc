@@ -6,7 +6,7 @@ export const codeQuestions =
         {
             level: 1,
             question: `Az alábbi program kiírná hogy a beolvasott szám páros vagy páratlan,
-                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+                        de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -34,7 +34,7 @@ export const codeQuestions =
         {
             level: 1,
             question: `Az alábbi program kiírná hogy a beolvasott szám páros vagy páratlan,
-                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+                        de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -53,7 +53,7 @@ export const codeQuestions =
         {
             level: 1,
             question: `Új feladat. Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
-                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+                        de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -71,7 +71,7 @@ export const codeQuestions =
         {
             level: 1,
             question: `Az alábbi program kiírná 0 - 9-ig szóközök nélkül a számokat,
-                        de nem működik. Javítsa ki, mert több elírás is történt!`,
+                        de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -88,7 +88,7 @@ export const codeQuestions =
         },
         {
             level: 1,
-            question: 'Az alábbi program 10-et írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt!',
+            question: 'Az alábbi program 10-et írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt.',
             testCode: '',
             initialCode: `
             #include "stdio"
@@ -129,7 +129,7 @@ export const codeQuestions =
         //
         {
             level: 2,
-            question: 'Írjon egy C programot, amely beolvas 5 valós számot egy tömbbe és kiíratja a legnagyobb elemének az értéket.',
+            question: 'Írjon egy C programot, amely beolvas 5 egész számot egy tömbbe és kiíratja a legnagyobb elemének az értéket.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -138,13 +138,13 @@ export const codeQuestions =
 
             }
             `,
-            stdin: '10\n1\n7\n9\n3\n',
-            result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
+            stdin: '10\n1\n70\n9\n3\n',
+            result: { 'stderr': '', 'stdout': '70', 'exitCode': 0 },
             time: 2 * 60
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely beolvas 10 valós számot és kiíratja azokat a beolvasással ellentétes sorrendben.',
+            question: 'Írjon egy C programot, amely beolvas 10 egész számot és kiíratja azokat a beolvasással ellentétes sorrendben.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -159,7 +159,7 @@ export const codeQuestions =
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokből.',
+            question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokból.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -267,12 +267,13 @@ export const codeQuestions =
         //
         {
             level: 3,
-            question: 'Írjon egy oszthato() nevű függvényt, amely átvesz egy tömböt és visszaadja hány darab 3-mal osztható van benne.',
+            question: `Írjon egy "int oszthato(int*, int)" nevű függvényt, amely átvesz egy n elemű 
+                       tömböt és méretét majd visszaadja hány darab 3-mal osztható van benne.`,
             testCode: `
             #include <stdio.h>
             main() {
                 int v[] = {1,2,3,4,5,6,7,8,9,10};
-                printf("%d", oszthato(v));
+                printf("%d", oszthato(v, 10));
             }
             `,
             stdin: '',
@@ -378,7 +379,9 @@ export const codeQuestions =
                 int v[] = {1,2,3,4,5};
                 fordit(v);
                 for(int i = 0; i < 5; i++)
+                {
                     printf("%d", v[i]);
+                }
             }
             `,
             stdin: '',

@@ -5,7 +5,16 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/map';
 import Prism from 'prismjs';
-import { codeQuestions } from './codeQuestions';
+import { codeQuestions_1 } from './codeQuestions_1';
+import { codeQuestions_2 } from './codeQuestions_2';
+import { codeQuestions_3 } from './codeQuestions_3';
+import { codeQuestions_4 } from './codeQuestions_4';
+import { codeQuestions_5 } from './codeQuestions_5';
+import { codeQuestions_6 } from './codeQuestions_6';
+import { codeQuestions_7 } from './codeQuestions_7';
+import { codeQuestions_8 } from './codeQuestions_8';
+import { codeQuestions_9 } from './codeQuestions_9';
+import { codeQuestions_10 } from './codeQuestions_10';
 import { CompilerService } from './codecompile.service';
 import 'brace/index';
 import 'brace/mode/c_cpp.js';
@@ -52,11 +61,22 @@ export class AppComponent {
 
   public startTest() {
     if (this.testStarted) {
-      this.showDialog('A teszt már elindult, nem lehet újra indítani. </br> Újrakezdéshez frissítse a lapot.', () => {});
+      this.showDialog('A teszt már elindult, nem lehet újra indítani. </br> Újrakezdéshez frissítse a lapot.', () => { });
       return;
     }
     this.testStarted = true;
-
+    // collect questions
+    const codeQuestions = [];
+    codeQuestions.push(...codeQuestions_1);
+    codeQuestions.push(...codeQuestions_2);
+    codeQuestions.push(...codeQuestions_3);
+    codeQuestions.push(...codeQuestions_4);
+    codeQuestions.push(...codeQuestions_5);
+    codeQuestions.push(...codeQuestions_6);
+    codeQuestions.push(...codeQuestions_7);
+    codeQuestions.push(...codeQuestions_8);
+    codeQuestions.push(...codeQuestions_9);
+    codeQuestions.push(...codeQuestions_10);
     // gyors tesztelési célból a level = -1 kérdést kérdezzük először
     const quickTestQuestion = codeQuestions.filter(o => o.level === -1);
     if (quickTestQuestion.length === 1) {
@@ -71,6 +91,11 @@ export class AppComponent {
     for (let i = 1; i <= maxLevel; i++) {
       // egyes szintekhez tartozó feladatokat sorba rendezzük és 1-et kiválasztunk belőlük
       this.randomQuestions.push(...codeQuestions.filter(o => o.level === i).sort(() => .5 - Math.random()).slice(0, 1));
+    }
+    for (const q of this.randomQuestions) {
+      if (q.initialCode) {
+        q.initialCode = q.initialCode.replace(/\t/g, '    ');
+      }
     }
     // this.randomQuestions.push(...codeQuestions.sort(() => .5 - Math.random()));
 
@@ -115,7 +140,7 @@ export class AppComponent {
         this.showDialog('A válasza helytelen', () => { this.goNextQuestion(); });
       }
     }, (err) => {
-      this.showDialog(err, () => {});
+      this.showDialog(err, () => { });
     });
   }
 
@@ -127,7 +152,7 @@ export class AppComponent {
       this.startCountdownTimer();
     } else {
       this.testFinished = true;
-      this.showDialog('Vége a tesztnek', () => {});
+      this.showDialog('Vége a tesztnek', () => { });
       const timer = Observable.timer(0, 1000);
       this.timerStream = timer.subscribe(t => this.tickerFuncProtectResult(t));
     }

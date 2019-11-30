@@ -39,7 +39,9 @@
       </tr>
       <tr>
         <td>
-          <h3>{{randomQuestions[currentQuestionIndex].question}}</h3>
+          <markdown ngPreserveWhitespaces>
+              {{randomQuestions[currentQuestionIndex].question}}
+          </markdown>
         </td>
       </tr>
     </table>

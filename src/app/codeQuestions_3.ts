@@ -1,7 +1,7 @@
 export const codeQuestions_3 =
     [
         //
-        // LEVEL 3
+        // LEVEL 3 - egyszerű függvények vektor argumentummal
         //
         {
             level: 3,

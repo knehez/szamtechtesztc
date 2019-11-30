@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
@@ -49,7 +49,7 @@ export class AppComponent {
   codeInput: any;
   compilerOutput = '';
   endResult = '';
-  @ViewChild('modalTemplate')
+  @ViewChild('modalTemplate', { static: true })
   public modalTemplate: ModalTemplate<IContext, string, string>;
 
   constructor(private compilerService: CompilerService, private modalService: SuiModalService) { }
@@ -162,30 +162,22 @@ export class AppComponent {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
     // egyszerű feleltválasztós teszt
-    if (currentQuestion.result === undefined) {
-      this.setupTestQuestion(currentQuestion);
-    } else {
-      if (currentQuestion.initialCode !== undefined) {
-        // Ha van a kérdésben kódrészlet, akkor formázni kell:
-        //
-        // megnézzük hány üres karakter van a második sor előtt?
-        // amennyi van annyit veszünk el minden sor elejéből
-        //
-        const trimmedFirstLine = currentQuestion.initialCode;
-        const numberOfWhiteSpaces = trimmedFirstLine.split('\n')[1].search(/\S/);
-        this.codeInput = trimmedFirstLine.split('\n').map(t => t.substring(numberOfWhiteSpaces)).join('\n').trim();
-      }
+
+    if (currentQuestion.initialCode !== undefined) {
+      // Ha van a kérdésben kódrészlet, akkor formázni kell:
+      //
+      // megnézzük hány üres karakter van a második sor előtt?
+      // amennyi van annyit veszünk el minden sor elejéből
+      //
+      this.codeInput = this.removeWhiteCharsFromLineStarts(currentQuestion.initialCode);
     }
+    currentQuestion.question = this.removeWhiteCharsFromLineStarts(currentQuestion.question);
   }
 
-  setupTestQuestion(currentQuestion) {
-    const randomIndices = this.getRandomQuestionIndices(currentQuestion.wrong.length + 1);
-    this.currentAnswers[randomIndices[0]] = currentQuestion.good;
-    this.currentCorrectAnswer = randomIndices[0];
-    for (let i = 1; i < randomIndices.length; i++) {
-      this.currentAnswers[randomIndices[i]] = currentQuestion.wrong[i - 1];
-    }
-    this.currentCode = Prism.highlight(currentQuestion.code, Prism.languages.clike, 'clike');
+  removeWhiteCharsFromLineStarts(str: string): string {
+    const tmp = str;
+    const numberOfWhiteSpaces = tmp.split('\n')[1].search(/\S/);
+    return tmp.split('\n')[0] + tmp.split('\n').slice(1).map(t => t.substring(numberOfWhiteSpaces)).join('\n').trim();
   }
 
   getRandomQuestionIndices(maxIndex) {

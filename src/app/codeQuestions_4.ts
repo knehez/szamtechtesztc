@@ -1,10 +1,38 @@
 export const codeQuestions_4 =
     [
         //
-        // LEVEL 4
+        // LEVEL 4 - sztringkezelés
         //
         {
-            // sztring kezelés
+            level: 4,
+            question: `Írjon egy **megfordit(char* input, int len)** nevű függvényt,
+                       amely az input vektorban megadott len-karakter hosszúságú szöveget megfordítja.`,
+            testCode: `
+            #include <stdio.h>
+            #include <stdlib.h>
+            main()
+            {
+                char v[] = "abcdef";
+                megfordit(v, 6);
+                printf("%s", v);
+            }
+            `,
+            stdin: '',
+            solution: `
+            megfordit(char* input, int len)
+            {
+                for(int i = 0; i < len/2; i++)
+                {
+                    char temp = input[i];
+                    input[i] = input[len-1-i];
+                    input[len-1-i] = temp;
+                }
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'fedcba', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        {
             level: 4,
             question: `Írjon egy kiszed(char* input, char *output) nevű függvényt,
                        amely az input vektorban megadott szövegből kiveszi
@@ -36,6 +64,44 @@ export const codeQuestions_4 =
             }
             `,
             result: { 'stderr': '', 'stdout': 'aae', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        {
+            level: -1,
+            question: `Írjon egy **kiegeszit(char* input, int len)** nevű függvényt,
+                       amely az input vektorban megadott len-karakter hosszúságú szöveg minden karaktere után egy szóközt szúr be.
+                       ### Példa
+                       ---
+                       #### Bemenet
+                       Hello
+
+                       #### Kimenet
+                       H e l l o
+
+                       `,
+            testCode: `
+            #include <stdio.h>
+            #include <stdlib.h>
+            main()
+            {
+                char v[] = "abcdef";
+                megfordit(v, 6);
+                printf("%s", v);
+            }
+            `,
+            stdin: '',
+            solution: `
+            megfordit(char* input, int len)
+            {
+                for(int i = 0; i < len/2; i++)
+                {
+                    char temp = input[i];
+                    input[i] = input[len-1-i];
+                    input[len-1-i] = temp;
+                }
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'fedcba', 'exitCode': 0 },
             time: 3 * 60
         },
     ];

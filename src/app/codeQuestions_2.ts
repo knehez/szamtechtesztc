@@ -1,7 +1,7 @@
 export const codeQuestions_2 =
     [
         //
-        // LEVEL 2
+        // LEVEL 2 - egyszerű algoritmusok - bevitel és tömb
         //
         {
             level: 2,

@@ -13,6 +13,10 @@ sudo su
 # ne kérje mindig a passwordot
 git config credential.helper store
 git pull
+
+# rootként a node verziót át kell állítani > 10.x-re
+sudo n
+
 ./node_modules/@angular/cli/bin/ng build --prod --no-sourcemap --base-href "/szamtech-teszt-c/"
 ```
 ha a backend kód változott akkor először le kell állítani a futó szolgáltatást: 

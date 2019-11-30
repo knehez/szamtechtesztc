@@ -28,7 +28,7 @@ export const codeQuestions_1 =
 			}
             `,
             stdin: 'F',
-            result: { 'stderr': '', 'stdout': 'nagy betu', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': 'karakter:nagy betu', 'exitCode': 0 },
             time: 1 * 60
         },
         {

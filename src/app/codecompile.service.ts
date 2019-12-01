@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CompilerService {
     salt = 'HGE%+/635362GHGSDOIZEWLKJDCSD)(=+GJH';
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     compileCode(data) {
         return new Promise((resolve, reject) => {
             data.hashCode = this.hashCode(data.source + this.salt);
             this.http.post('/c-compiler-backend/compiler', data)
-                .map(res => res.json())
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {

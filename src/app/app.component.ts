@@ -4,7 +4,6 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/map';
-import Prism from 'prismjs';
 import { codeQuestions_1 } from './codeQuestions_1';
 import { codeQuestions_2 } from './codeQuestions_2';
 import { codeQuestions_3 } from './codeQuestions_3';
@@ -176,8 +175,12 @@ export class AppComponent {
 
   removeWhiteCharsFromLineStarts(str: string): string {
     const tmp = str;
-    const numberOfWhiteSpaces = tmp.split('\n')[1].search(/\S/);
-    return tmp.split('\n')[0] + tmp.split('\n').slice(1).map(t => t.substring(numberOfWhiteSpaces)).join('\n').trim();
+    const splittedStr = tmp.split('\n');
+    if(splittedStr.length === 1) {
+      return str;
+    }
+    const numberOfWhiteSpaces = splittedStr[1].search(/\S/);
+    return splittedStr[0] + splittedStr.slice(1).map(t => t.substring(numberOfWhiteSpaces)).join('\n').trim();
   }
 
   getRandomQuestionIndices(maxIndex) {

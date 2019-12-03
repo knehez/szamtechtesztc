@@ -176,7 +176,7 @@ export class AppComponent {
   removeWhiteCharsFromLineStarts(str: string): string {
     const tmp = str;
     const splittedStr = tmp.split('\n');
-    if(splittedStr.length === 1) {
+    if (splittedStr.length === 1) {
       return str;
     }
     const numberOfWhiteSpaces = splittedStr[1].search(/\S/);

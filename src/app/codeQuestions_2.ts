@@ -138,4 +138,79 @@ export const codeQuestions_2 =
             result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
             time: 2 * 60
         },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely bekér egy számot és ha az egész akkor "int" szöveget, ha tört akkor "float" szöveget ír ki.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '3.4',
+            result: { 'stderr': '', 'stdout': 'float', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely bekér egy karaktert és ha kisbetűs akkor "kicsi", ha nagybetűs akkor "nagy" szöveget ír ki.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: 'k',
+            result: { 'stderr': '', 'stdout': 'kicsi', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely elvégzi az összeadás és kivonás műveletet. Mintabemenet: 4 - 2',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '9 - 1',
+            result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely beolvas egy számot és kiírja a számjegyeit fordított sorrendben.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '2486',
+            result: { 'stderr': '', 'stdout': '6842', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        {
+            level: 2,
+            question: 'Írjon egy C programot, amely egy bekért N értékig kiírja a páros számokat külön sorba.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '7',
+            result: { 'stderr': '', 'stdout': '2\n4\n6\n', 'exitCode': 0 },
+            time: 2 * 60
+        },
     ];

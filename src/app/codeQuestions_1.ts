@@ -88,7 +88,7 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '0123456789', 'exitCode': 0 },
             time: 1 * 60
         },
-        {
+        { // 5
             level: 1,
             question: 'Az alábbi program 10-et írna képernyőre, de nem fordul le. Javítsa ki, mert több elírás is történt.',
             testCode: '',
@@ -144,35 +144,6 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': 'Januar\tFebruar\tMarcius\n2005\t2003\t2001\n1999\t2001\t1989\n', 'exitCode': 0 },
             time: 1 * 60
         },
-        {   //FILE
-            level: 1,
-            question: 'Az alábbi program a ki.txt fájlba írná bele, hogy "Helo Vilag", de nem fordul le. Javítsa ki, mert több elírás is történt.',
-            testCode: `
-            #include <stdio.h>
-            main() {
-                FILE *f;
-                char buff[255];
-                f = fopen("ki.txt","r");
-                fscanf(f, "%s", buff);
-                printf("%s", buff );
-            
-                fclose(f);
-            }
-            `,
-            initialCode: `
-            #include "stdio"
-            main()
-            {
-                FILE *f;
-                f = fopen("ki.txt","r");
-                fprintf(file,"Helo vilag\n");
-                fclose(file);
-            }
-            `,
-            stdin: '',
-            result: { 'stderr': '', 'stdout': 'Helo vilag\n', 'exitCode': 0 },
-            time: 1 * 60
-        },
         {
             level: 1,
             question: 'Az alábbi program egy bekért szám 3-al való osztás egész részét írná ki, de nem fordul le. Javítsa ki, mert több elírás is történt.',
@@ -207,7 +178,7 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
             time: 1 * 60
         },
-        {
+        { // 10
             level: 1,
             question: 'Az alábbi program bekér két lebegőpontos számot majd kijelezné a hányadosukat két tizedes pontossággal, de nem fordul le. Javítsa ki, mert több elírás is történt.',
             testCode: '',
@@ -225,4 +196,150 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '32.83', 'exitCode': 0 },
             time: 1 * 60
         },
+        {
+            level: 1,
+            question: 'Az alábbi program kiírja a páratlan számokat külön sorba egy bekért N értékig. Javítsa ki, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int i, n;
+                scanf("%d" &n);
+                for(i = 1; i < n; i+=2) {
+                    printf("%d\n", &i)
+                }
+            }
+            `,
+            stdin: '6',
+            result: { 'stderr': '', 'stdout': '1\n3\n5\n', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
+            question: 'Az alábbi program beolvas 10 számot és kiírja a pozitívak darabszámát. Javítsa ki, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int i; db = 0; szam;
+                for(i = 0, i < 10, i++) {
+                    scanf("%d",&szam);
+                    if (szam>0) db++;
+                }
+                printf("%d",db);
+            }
+            `,
+            stdin: '-3 -4 -5 -6 -7 -8 1 2 -2 -10',
+            result: { 'stderr': '', 'stdout': '2', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
+            question: 'Az alábbi program beolvas egy számot és kiírja az összes osztóját. Javítsa ki, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int n,o = 2;
+                scanf("%d",&n);
+                while (o < n);
+                {
+                    if (n%o = 0) printf("%d\n",o)
+                    o++;
+                }
+            }
+            `,
+            stdin: '6',
+            result: { 'stderr': '', 'stdout': '2\n3\n', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
+            question: 'Az alábbi program beolvas egy számot és eldönti, hogy prím-e. Javítsa ki, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            #include <math.h>
+            main()
+            {
+                int n, i = 2;
+                scanf("%d", n);
+                while(i <= (int)sqrt(n) && n % i != 0) {
+                    i++
+                }
+                if(n / i == 0) printf("Nem prim");
+                else printf("Prim");
+            }
+            `,
+            stdin: '6',
+            result: { 'stderr': '', 'stdout': 'Nem prim', 'exitCode': 0 },
+            time: 1 * 60
+        },
+        {
+            level: 1,
+            question: 'Az alábbi program két szám legkisebb közös többszörösét írná ki. Javítsa ki, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            #include <math.h>
+            main()
+            {
+                int n1, n2, k
+                scanf("%d",&n1);
+                scanf("%d",&n2);
+                if (n1>n2) {
+                    k = n1;
+                } else {
+                    k = n2;
+                }
+                
+                while (k <= n1 * n2) {
+                    if (k % n1 == 0) {
+                        if (k % n2 = 0)
+                        {
+                            printf("%d", k);
+                            break
+                        }
+                    }
+                    k=k+1;
+                }
+            }
+            `,
+            stdin: '12 8',
+            result: { 'stderr': '', 'stdout': '24', 'exitCode': 0 },
+            time: 1 * 60
+        },
+
+        /*{   //FILE
+            level: 1,
+            question: 'Az alábbi program a ki.txt fájlba írná bele, hogy "Helo Vilag", de nem fordul le. Javítsa ki, mert több elírás is történt.',
+            testCode: `
+            #include <stdio.h>
+            main() {
+                FILE *f;
+                char buff[255];
+                f = fopen("ki.txt","r");
+                fscanf(f, "%s", buff);
+                printf("%s", buff );
+            
+                fclose(f);
+            }
+            `,
+            initialCode: `
+            #include "stdio"
+            main()
+            {
+                FILE *f;
+                f = fopen("ki.txt","r");
+                fprintf(file,"Helo vilag\n");
+                fclose(file);
+            }
+            `,
+            stdin: '',
+            result: { 'stderr': '', 'stdout': 'Helo vilag\n', 'exitCode': 0 },
+            time: 1 * 60
+        },*/
     ];

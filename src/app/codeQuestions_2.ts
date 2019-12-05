@@ -63,7 +63,7 @@ export const codeQuestions_2 =
             result: { 'stderr': '', 'stdout': '45', 'exitCode': 0 },
             time: 2 * 60
         },
-        {
+        { // 5
             level: 2,
             question: 'Írjon egy C programot, amely kiírja kettő hatványait 2048-al bezárólag.',
             testCode: '',
@@ -138,7 +138,7 @@ export const codeQuestions_2 =
             result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
             time: 2 * 60
         },
-        {
+        { // 10
             level: 2,
             question: 'Írjon egy C programot, amely bekér egy számot és ha az egész akkor "int" szöveget, ha tört akkor "float" szöveget ír ki.',
             testCode: '',
@@ -150,6 +150,18 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '3.4',
+            soluton: `
+            #include <stdio.h>
+            main()
+            {
+                float a;
+                int b;
+                scanf("%f", &a);
+                b = a;
+                if((float)b == a) printf("int");
+                else printf("float");
+            }
+            `,
             result: { 'stderr': '', 'stdout': 'float', 'exitCode': 0 },
             time: 2 * 60
         },
@@ -211,6 +223,21 @@ export const codeQuestions_2 =
             `,
             stdin: '7',
             result: { 'stderr': '', 'stdout': '2\n4\n6\n', 'exitCode': 0 },
+            time: 2 * 60
+        },
+        { // 15
+            level: 2,
+            question: 'Írjon egy C programot, amely egy bekért N értékig kiírja a páratlan számokat külön sorba.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+
+            }
+            `,
+            stdin: '6',
+            result: { 'stderr': '', 'stdout': '1\n3\n5\n', 'exitCode': 0 },
             time: 2 * 60
         },
     ];

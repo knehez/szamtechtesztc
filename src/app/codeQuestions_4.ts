@@ -149,7 +149,7 @@ export const codeQuestions_4 =
             result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
             time: 3 * 60
         },
-        {
+        { // 5
             level: 4,
             question: `Írjon egy **char leggyakoribb(char* input, int len)** nevű függvényt, 
                        ami az input vektorban megadott **len**-karakter hosszúságú szöveget megvizsgálja és visszaadja, hogy melyik betű fordul elő benne a legtöbbször.

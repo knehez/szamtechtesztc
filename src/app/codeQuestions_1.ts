@@ -278,7 +278,7 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': 'Nem prim', 'exitCode': 0 },
             time: 1 * 60
         },
-        {
+        { // 15
             level: 1,
             question: 'Az alábbi program két szám legkisebb közös többszörösét írná ki. Javítsa ki, mert több elírás is történt.',
             testCode: '',
@@ -312,34 +312,49 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '24', 'exitCode': 0 },
             time: 1 * 60
         },
-
-        /*{   //FILE
+        {
             level: 1,
-            question: 'Az alábbi program a ki.txt fájlba írná bele, hogy "Helo Vilag", de nem fordul le. Javítsa ki, mert több elírás is történt.',
-            testCode: `
-            #include <stdio.h>
-            main() {
-                FILE *f;
-                char buff[255];
-                f = fopen("ki.txt","r");
-                fscanf(f, "%s", buff);
-                printf("%s", buff );
-            
-                fclose(f);
-            }
-            `,
+            question: 'Az alábbi program bekér a felhasználótól egy N számot, majd bekér N darab számot és kiírja az összegét. Javítsa ki a kódot, mert több elírás is történt.',
+            testCode: '',
             initialCode: `
-            #include "stdio"
+            #include <stdio>
             main()
-            {
-                FILE *f;
-                f = fopen("ki.txt","r");
-                fprintf(file,"Helo vilag\n");
-                fclose(file);
-            }
+			{
+				int n, összeg;
+				scanf("%i",&N);
+				  
+				for(i=0; i<N; ++i)   
+				{    
+					int buffer;
+					scanf('%d',&buffer);
+					összeg+=buffer;
+				}
+				printf("összeg");
+			}
             `,
-            stdin: '',
-            result: { 'stderr': '', 'stdout': 'Helo vilag\n', 'exitCode': 0 },
+            stdin: '3\n12\n13\n5\n',
+            result: { 'stderr': '', 'stdout': '30', 'exitCode': 0 },
             time: 1 * 60
-        },*/
+        },
+		
+		{
+            level: 1,
+            question: 'Az alábbi program beolvas 3 számot, majd meghatározza a legnagyobbat és kiírjatja. Javítsa ki a kódot, mert több elírás is történt.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main
+			{
+				int a, b, c, legnagyobb;
+				scanf("%d%d%d", a, b, c)
+				legnagyobb = ((a>b && a>c) ? a ? (( b>a && b>c)? b ? c))
+				printf("%d" legnagyobb);
+			}
+            `,
+            stdin: '5\n6\n4\n',
+            result: { 'stderr': '', 'stdout': '6', 'exitCode': 0 },
+            time: 1 * 60
+        },
+
+
     ];

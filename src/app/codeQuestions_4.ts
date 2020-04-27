@@ -70,7 +70,7 @@ export const codeQuestions_4 =
             level: 4,
             question: `Írjon egy **char* kiegeszit(char* input, int len)** nevű függvényt,
                        ami az input vektorban megadott **len**-karakter hosszúságú szöveg minden karaktere után egy _szóközt_ szúr be.
-                       
+
                        Ha a **bemenet**: HELLO, akkor a **függvény visszatérési értéke**: H E L L O legyen.
                        * hozzon létre egy megfelelő méretű új karaktervektort a függvényben dinamikusan
                        * másolja bele az input karaktertömb értékeit és a szóközöket
@@ -113,11 +113,11 @@ export const codeQuestions_4 =
         },
         {
             level: 4,
-            question: `Írjon egy **int wordCounter(char* input, int len)** nevű függvényt, 
+            question: `Írjon egy **int wordCounter(char* input, int len)** nevű függvényt,
                        ami az input vektorban megadott **len**-karakter hosszúságú szöveget megvizsgálja és visszaadja, hogy hány szó van benne.
-                       
+
                        Ha a **bemenet**: "Hello world here", akkor a **függvény visszatérési értéke**: 3.
-                       
+
                        (megjegyzés: a szavak között csak 1 szóköz lehet a bemenetekben)
                        `,
             testCode: `
@@ -151,11 +151,11 @@ export const codeQuestions_4 =
         },
         { // 5
             level: 4,
-            question: `Írjon egy **char leggyakoribb(char* input, int len)** nevű függvényt, 
+            question: `Írjon egy **char leggyakoribb(char* input, int len)** nevű függvényt,
                        ami az input vektorban megadott **len**-karakter hosszúságú szöveget megvizsgálja és visszaadja, hogy melyik betű fordul elő benne a legtöbbször.
-                       
+
                        Ha a **bemenet**: "Hello here", akkor a **függvény visszatérési értéke**: e.
-                       
+
                        (megjegyzés: a legtöbbször előfordulóból mindig 1 lesz)
 
                        * készítsünk egy tömböt, ami az egyes előfordulásokat fogja tartalmazni, 0-val inicializáljuk az elemeit
@@ -165,9 +165,9 @@ export const codeQuestions_4 =
             testCode: `
             #include <stdio.h>
             #include <stdlib.h>
-            
+
             char leggyakoribb(char* input, int len);
-            
+
             main()
             {
                 char v[] = "ez ss asdasdas ass ss";
@@ -183,12 +183,12 @@ export const codeQuestions_4 =
                 {
                     gyakorisag[i] = 0;
                 }
-            
+
                 for(int i=0; i<len; i++)
                 {
                     gyakorisag[(int)input[i]]+=1;
                 }
-            
+
                 int max = gyakorisag[0];
                 char gyakori;
                 for(int i=0; i<255; i++)

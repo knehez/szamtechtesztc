@@ -54,7 +54,7 @@ export const codeQuestions_1 =
             level: 1,
             question: `Az alábbi program kiírná **0-9**-ig szóközökkel a számokat,
                         de nem működik.
-                        
+
                         Javítsa ki, több elírás is történt és a **működése is hibás**.`,
             testCode: '',
             initialCode: `
@@ -295,7 +295,7 @@ export const codeQuestions_1 =
                 } else {
                     k = n2;
                 }
-                
+
                 while (k <= n1 * n2) {
                     if (k % n1 == 0) {
                         if (k % n2 = 0)
@@ -322,9 +322,9 @@ export const codeQuestions_1 =
 			{
 				int n, összeg;
 				scanf("%i",&N);
-				  
-				for(i=0; i<N; ++i)   
-				{    
+
+				for(i=0; i<N; ++i)
+				{
 					int buffer;
 					scanf('%d',&buffer);
 					összeg+=buffer;
@@ -336,8 +336,8 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '30', 'exitCode': 0 },
             time: 1 * 60
         },
-		
-		{
+
+        {
             level: 1,
             question: 'Az alábbi program beolvas 3 számot, majd meghatározza a legnagyobbat és kiírjatja. Javítsa ki a kódot, mert több elírás is történt.',
             testCode: '',

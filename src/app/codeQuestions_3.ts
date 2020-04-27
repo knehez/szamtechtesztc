@@ -5,7 +5,7 @@ export const codeQuestions_3 =
         //
         {
             level: 3,
-            question: `Írjon egy "int oszthato(int*, int)" nevű függvényt, amely átvesz egy n elemű 
+            question: `Írjon egy "int oszthato(int*, int)" nevű függvényt, amely átvesz egy n elemű
                        tömböt és méretét majd visszaadja hány darab 3-mal osztható van benne.`,
             testCode: `
             #include <stdio.h>
@@ -206,8 +206,6 @@ export const codeQuestions_3 =
                 for(int i = 0; i < 3; i++) {
                     printf("%d\n", *(negyzet+i));
                 }
-                
-
             }
             `,
             stdin: '',

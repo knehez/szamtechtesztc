@@ -7,7 +7,7 @@ export const codeQuestions_5 =
             level: 5,
             question: `Írjon egy **int megfordit(int num)** függvényt,
                        amely az input vektorban megadott num (max 10 számjegy) számjegyeit megfordítja.
-                       
+
                        Példa: Ha a **bemenet:** 47323 **kimenet:** 32374
                        `,
             testCode: `
@@ -57,8 +57,8 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '-13', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+
+        {
             level: 5,
             question: `Írjon egy **void binaris(short num)** függvényt,
                        amely a num számot bináris formában írja ki.
@@ -85,12 +85,12 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '0000000000001010', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+
+        {
             level: 5,
             question: `Írjon egy **short atbillent(short num)** függvényt,
                        amely a num szám második bitjét az ellenkezőjére változtatja, majd visszaadja az így kapott számot.
-                       
+
                        Példa: Ha a **bemenet:** 1 **kimenet:** 3
                        `,
             testCode: `
@@ -111,12 +111,12 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '258', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{ // 5
+
+        { // 5
             level: 5,
             question: `Írjon egy **short atbillent(short num)** függvényt,
                        amely a num szám második és negyedik bitjét az ellenkezőjére változtatja, majd visszaadja az így kapott számot.
-                       
+
                        Példa: Ha a **bemenet:** 1 **kimenet:** 3
                        `,
             testCode: `
@@ -137,12 +137,12 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '294', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+
+        {
             level: 5,
             question: `Írjon egy **int bitstatusz(int num)** függvényt,
                        amely a num szám harmadik bitjének státuszát adja vissza.
-                       
+
                        Példa: Ha a **bemenet:** 5 **kimenet:** 1
                        `,
             testCode: `
@@ -163,12 +163,12 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+
+        {
             level: 5,
             question: `Írjon egy **int bithossz(int num)** függvényt,
                        amely a num szám bináris értékének tényleges hosszát adja vissza.
-                       
+
                        Példa: Ha a **bemenet:** 5 (101) **kimenet:** 3
                        `,
             testCode: `
@@ -194,12 +194,12 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+
+        {
             level: 5,
             question: `Írjon egy **int egyesbitek(int num)** függvényt,
                        amely a num szám 1-es bitjeit számolja meg, majd visszaadja ezt az értéket.
-                       
+
                        Példa: Ha a **bemenet:** 5 (101) **kimenet:** 2
                        `,
             testCode: `
@@ -224,8 +224,7 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{
+        {
             level: 5,
             question: `Írjon egy **float matrixatlag(int sor, int oszlop, int matrix[sor][oszlop])** függvényt,
                        amely átveszi egy mátrix méreteit és a mátrixot, majd visszaadja az átlagát.
@@ -252,8 +251,8 @@ export const codeQuestions_5 =
             result: { 'stderr': '', 'stdout': '3.33', 'exitCode': 0 },
             time: 3 * 60
         },
-		
-		{ // 10
+
+        { // 10
             level: 5,
             question: `Írjon egy **int csere(int num)** függvényt,
                        amely a num szám számjegyei közül az összes 0-t 1-re cseréli.

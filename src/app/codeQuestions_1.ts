@@ -135,9 +135,9 @@ export const codeQuestions_1 =
             #include "stdio"
             main()
             {
-                printf("Januar\nFebruar\nMarcius\n");
+                printf("Januar Februar    Marcius");
                 printf("2005\"2003\"2001\"");
-                printf("1999\t2001\r1989\0");
+                printf("1999\t2001\r1989");
             }
             `,
             stdin: '',

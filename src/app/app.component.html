@@ -71,13 +71,7 @@
         <h3>Eredmény</h3>
     </ng-template>
     <ng-template pTemplate="footer">
-        <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Rendben" (click)="cd.accept()"></button>
     </ng-template>
   </p-confirmDialog>
-  <ng-template let-context let-modal="modal" #modalTemplate>
-    <div class="header">{{ context.data }}</div>
-    <div class="actions">
-      <button class="ui green button" (click)="modal.approve('done')" autofocus>OK</button>
-    </div>
-  </ng-template>
 </div>

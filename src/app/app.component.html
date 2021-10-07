@@ -15,12 +15,11 @@
         </td>
         <td>
           <div class="field">
-            <input type="text" [(ngModel)]="userName" size="20" [disabled]="testStarted">
+            <input type="text" pInputText [(ngModel)]="userName" size="20" [disabled]="testStarted"/>
           </div>
         </td>
         <td>
-          <input type="button" class="ui positive basic button" [disabled]="userName.length < 6" value="Teszt indítása"
-            (click)="startTest()">
+          <button pButton type="button" class="p-button-outlined" [disabled]="userName.length < 6" label="Teszt indítása" (click)="startTest()"></button>
         </td>
       </tr>
     </table>
@@ -53,12 +52,10 @@
       </tr>
       <tr align="center">
         <td *ngIf="true">
-          <input type="button" class="ui positive basic button" value="Próba beküldés" (click)="checkTestSolution()"
-            [disabled]="testFinished">
+          <button pButton type="button" class="p-button-outlined" [disabled]="testFinished" label="Próba beküldés" (click)="checkTestSolution()"></button>
         </td>
         <td colspan="2">
-          <input type="button" class="ui positive basic button" value="Válasz beküldés" (click)="checkCodeSolution()"
-            [disabled]="testFinished">
+          <button pButton type="button" class="p-button-outlined" [disabled]="testFinished" label="Válasz beküldés" (click)="checkCodeSolution()"></button>
         </td>
       </tr>
       <tr>
@@ -69,6 +66,14 @@
     </table>
     <h3 class="small-divider center">Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
   </div>
+  <p-confirmDialog #cd [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h3>Eredmény</h3>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>
   <ng-template let-context let-modal="modal" #modalTemplate>
     <div class="header">{{ context.data }}</div>
     <div class="actions">

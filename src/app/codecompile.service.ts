@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CompilerService {
@@ -8,16 +8,9 @@ export class CompilerService {
 
     constructor(private http: HttpClient) { }
 
-    compileCode(data) {
-        return new Promise((resolve, reject) => {
-            data.hashCode = this.hashCode(data.source + this.salt);
-            this.http.post('/c-compiler-backend/compiler', data)
-                .subscribe(res => {
-                    resolve(res);
-                }, (err) => {
-                    reject(err);
-                });
-        });
+    compileCode(data): Observable<any> {
+        data.hashCode = this.hashCode(data.source + this.salt);
+        return this.http.post('/c-compiler-backend/compiler', data);
     }
 
     hashCode = (str: string) => {

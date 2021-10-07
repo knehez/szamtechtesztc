@@ -23,7 +23,7 @@ export const codeQuestions_1 =
 				} else if( c1 >= '0' && c1 <= '9') {
 					printf('szamjegy');
 				} else {
-					printf("mas karakter\n");
+					printf("mas karakter");
 				}
 			}
             `,
@@ -38,7 +38,7 @@ export const codeQuestions_1 =
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            main()
+            int main()
             {
                 int szam;
 				scanf("&f", szam);

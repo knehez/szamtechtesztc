@@ -246,17 +246,17 @@ export const codeQuestions_2 =
         },
         { // 15
             level: 2,
-            question: 'Írjon egy C programot, amely egy bekért N értékig kiírja a páratlan számokat külön sorba.',
+            question: 'Írjon egy C programot, amely 0-tól egy bekért N értékig kiírja a páratlan számokat egymás után szóközök nélkül.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            main()
+            int main()
             {
 
             }
             `,
             stdin: '6',
-            result: { 'stderr': '', 'stdout': '1\n3\n5\n', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '135', 'exitCode': 0 },
             time: 2 * 60
         },
     ];

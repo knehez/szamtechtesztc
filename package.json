@@ -29,7 +29,6 @@
     "compile-run": "^2.3.4",
     "core-js": "^3.4.5",
     "dotenv": "^6.2.0",
-    "fomantic-ui": "^2.8.8",
     "gulp": "^4.0.0",
     "gulp-nodemon": "^2.5.0",
     "ng2-ace-editor": "^0.3.1",

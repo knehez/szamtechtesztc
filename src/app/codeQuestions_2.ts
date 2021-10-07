@@ -184,6 +184,25 @@ export const codeQuestions_2 =
             level: 2,
             question: 'Írjon egy C programot, amely elvégzi az összeadás és kivonás műveletet. Mintabemenet: 4 - 2',
             testCode: '',
+            solution: `
+            #include <stdio.h>
+            int main()
+            {
+                int a, c, res;
+                char b;
+                scanf("%d %c %d", &a, &b, &c);
+                if (b == '-')
+                {
+                    res = a - c;
+                }
+                if (b == '+')
+                {
+                    res = a + c;
+                }
+                printf("%d", res);
+                return 0;
+            }
+            `,
             initialCode: `
             #include <stdio.h>
             main()

@@ -132,10 +132,18 @@ export class AppComponent {
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
     const code = { source: this.codeInput + "\n" + testCode, stdin: stdin };
     this.compilerService.compileCode(code).subscribe((res) => {
-      this.compilerOutput = JSON.stringify(res["stderr"])
-        .replace(/(\\r\\n)|(\\n)/g, "\n")
+      let compilerOutput = res["stderr"]
         .replace(/^.*(\.c|.h):/gm, "[source]")
-        .replace(/(\\r\\n|\n)/g, "<br />");
+        .replace(/(\r\n|\n)/g, "<br />");
+        
+        compilerOutput = "Compiler output:<br/>" + compilerOutput;
+
+        // show executable program's output
+        let executableOutput = res["stdout"]
+        .replace(/^.*(\.c|.h):/gm, "[source]")
+        .replace(/(\r\n|\n)/g, "<br />");
+
+        this.compilerOutput = compilerOutput + "<br/>Executable output: </br>" + executableOutput;
     });
   }
 
@@ -149,6 +157,8 @@ export class AppComponent {
     const code = { source: this.codeInput + "\n" + testCode, stdin: stdin };
     this.compilerService.compileCode(code).subscribe(
       (solution) => {
+        // replace \r\n-s on windows
+        solution.stdout = solution.stdout.replace(/(\r)/g, '');
         // solution is OK whether these 3 properties are equuals
         // sample solution from the backend: { 'stderr': '', 'stdout': 'xxxx', 'exitCode': 0 },
         if (

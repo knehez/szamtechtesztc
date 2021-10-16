@@ -29,7 +29,7 @@ export const codeQuestions_1 =
             `,
             stdin: 'F',
             result: { 'stderr': '', 'stdout': 'karakter:nagy betu', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -48,7 +48,7 @@ export const codeQuestions_1 =
             `,
             stdin: '9',
             result: { 'stderr': '', 'stdout': 'paratlan', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -68,7 +68,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '0 1 2 3 4 5 6 7 8 9 ', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -86,7 +86,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '0123456789', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         { // 5
             level: 1,
@@ -102,7 +102,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -125,7 +125,7 @@ export const codeQuestions_1 =
             `,
             stdin: '0\n1\n2\n3\n4\n',
             result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -142,7 +142,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': 'Januar\tFebruar\tMarcius\n2005\t2003\t2001\n1999\t2001\t1989\n', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -159,7 +159,7 @@ export const codeQuestions_1 =
             `,
             stdin: '11',
             result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -176,7 +176,7 @@ export const codeQuestions_1 =
             `,
             stdin: '7',
             result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         { // 10
             level: 1,
@@ -194,7 +194,7 @@ export const codeQuestions_1 =
             `,
             stdin: '3.4 1.2',
             result: { 'stderr': '', 'stdout': '32.83', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -213,7 +213,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': '1\n3\n5\n', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -233,7 +233,7 @@ export const codeQuestions_1 =
             `,
             stdin: '-3 -4 -5 -6 -7 -8 1 2 -2 -10',
             result: { 'stderr': '', 'stdout': '2', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -254,7 +254,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': '2\n3\n', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -276,7 +276,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': 'Nem prim', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         { // 15
             level: 1,
@@ -310,7 +310,7 @@ export const codeQuestions_1 =
             `,
             stdin: '12 8',
             result: { 'stderr': '', 'stdout': '24', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
         {
             level: 1,
@@ -334,7 +334,7 @@ export const codeQuestions_1 =
             `,
             stdin: '3\n12\n13\n5\n',
             result: { 'stderr': '', 'stdout': '30', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
 
         {
@@ -353,7 +353,7 @@ export const codeQuestions_1 =
             `,
             stdin: '5\n6\n4\n',
             result: { 'stderr': '', 'stdout': '6', 'exitCode': 0 },
-            time: 1 * 60
+            time: 2 * 60
         },
 
 

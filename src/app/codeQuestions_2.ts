@@ -20,7 +20,7 @@ export const codeQuestions_2 =
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely beolvas 10 egész számot és kiíratja azokat a beolvasással ellentétes sorrendben.',
+            question: 'Írjon egy C programot, amely beolvas 10 egész számot és kiíratja azokat a beolvasással ellentétes sorrendben (minden szám után új sorba kerüljön).',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -30,7 +30,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n',
-            result: { 'stderr': '', 'stdout': '9\n8\n7\n6\n5\n4\n3\n2\n1\n0', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n', 'exitCode': 0 },
             time: 2 * 60
         },
         {
@@ -45,7 +45,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '3',
-            result: { 'stderr': '', 'stdout': '***\n***\n***', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '***\n***\n***\n', 'exitCode': 0 },
             time: 2 * 60
         },
         {

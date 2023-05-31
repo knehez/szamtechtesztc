@@ -50,13 +50,30 @@ export const codeQuestions_2 =
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely összeadja a számokat n-ig és kiírja az eredményt.',
+            question: 'Írjon egy C programot, amely bekér egy egész számot, majd összeadja a számokat 1-től n-ig és kiírja az eredményt.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            main()
+            
+            int main()
             {
 
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main()
+            {
+                int n;
+                scanf("%d", &n);
+                
+                int sum = 0;
+                for(int i = 1; i <= n; i++)
+                {
+                    sum += i;
+                }
+                printf("%d", sum);
             }
             `,
             stdin: '9',

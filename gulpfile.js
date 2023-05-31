@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var del = require('del');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var nodemon = require('gulp-nodemon');
@@ -14,9 +13,10 @@ gulp.task('obfuscate', function (done) {
         });
 });
 
-gulp.task('clean-backend', function (done) {
+gulp.task('clean-backend', async function (done) {
     const dir = 'dist-server';
-    del([dir]);
+    await import("fs")
+    fs.rmSync(dir, { recursive: true }); 
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }

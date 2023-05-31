@@ -5,7 +5,7 @@ export const codeQuestions_1 =
         //
         {
             level: 1,
-            question: `Az alábbi program kiírná hogy a beolvasott karakter kicsi vagy nagybetű,
+            question: `Az alábbi program kiírná, hogy a beolvasott karakter kicsi vagy nagybetű vagy számjegy, 
                         de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
@@ -33,7 +33,7 @@ export const codeQuestions_1 =
         },
         {
             level: 1,
-            question: `Az alábbi program kiírná hogy a beolvasott szám páros vagy páratlan,
+            question: `Az alábbi program kiírná, hogy a beolvasott szám páros vagy páratlan,
                         de nem működik. Javítsa ki, mert több elírás is történt.`,
             testCode: '',
             initialCode: `
@@ -129,7 +129,7 @@ export const codeQuestions_1 =
         },
         {
             level: 1,
-            question: 'Az alábbi program táblázatos formában íratna ki, de nem fordul le. Javítsa ki, mert több elírás is történt.',
+            question: 'Az alábbi program táblázatos formában íratna ki 3 sort, soronként tabulátor karakterrel elválasztva, de nem fordul le. Javítsa ki, mert több elírás is történt.',
             testCode: '',
             initialCode: `
             #include "stdio"
@@ -146,7 +146,7 @@ export const codeQuestions_1 =
         },
         {
             level: 1,
-            question: 'Az alábbi program egy bekért szám 3-al való osztás egész részét írná ki, de nem fordul le. Javítsa ki, mert több elírás is történt.',
+            question: 'Az alábbi program egy bekért egész szám, 3-al való osztásának egész részét írná ki, de nem működik. Javítsa ki, mert több elírás is történhetett.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -154,7 +154,7 @@ export const codeQuestions_1 =
             {
                 int x;
                 scanf("%f", x);
-                printf("%i",x/3);
+                printf("%i", x/3);
             }
             `,
             stdin: '11',
@@ -163,7 +163,7 @@ export const codeQuestions_1 =
         },
         {
             level: 1,
-            question: 'Az alábbi program egy bekért szám 3-al való osztási maradékát írná ki, de nem fordul le. Javítsa ki, mert több elírás is történt.',
+            question: 'Az alábbi program egy bekért egész szám 3-al való osztási maradékát írná ki, lefordul de nem működik. Javítsa ki, mert több elírás is történhetett.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -171,7 +171,7 @@ export const codeQuestions_1 =
             {
                 int x;
                 scanf("%i", x);
-                printf("%d",x%3);
+                printf("%d", x%3);
             }
             `,
             stdin: '7',
@@ -180,7 +180,7 @@ export const codeQuestions_1 =
         },
         { // 10
             level: 1,
-            question: 'Az alábbi program bekér két lebegőpontos számot majd kijelezné a hányadosukat két tizedes pontossággal, de nem fordul le. Javítsa ki, mert több elírás is történt.',
+            question: 'Az alábbi program bekér két lebegőpontos számot, majd kiírja a hányadosukat két tizedes pontossággal, de nem működik. Javítsa ki, mert több elírás is történt.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -192,13 +192,23 @@ export const codeQuestions_1 =
                 printf("%f", a/b);
             }
             `,
+            solution: `
+            #include <stdio.h>
+            int main()
+            {
+                float a, b;
+
+                scanf("%f %f", &a, &b);
+                printf("%.2f", a/b);
+            }
+            `,
             stdin: '3.4 1.2',
-            result: { 'stderr': '', 'stdout': '32.83', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '2.83', 'exitCode': 0 },
             time: 2 * 60
         },
         {
             level: 1,
-            question: 'Az alábbi program kiírja a páratlan számokat külön sorba egy bekért N értékig. Javítsa ki, mert több elírás is történt.',
+            question: 'Az alábbi program kiírja a páratlan számokat egymás alá, egy bekért egész N értékig. Javítsa ki, mert több elírás is történt.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -207,7 +217,7 @@ export const codeQuestions_1 =
                 int i, n;
                 scanf("%d" &n);
                 for(i = 1; i < n; i+=2) {
-                    printf("%d\n", &i)
+                    printf("%d\\n", &i)
                 }
             }
             `,
@@ -241,13 +251,13 @@ export const codeQuestions_1 =
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            main()
+            int main()
             {
                 int n,o = 2;
-                scanf("%d",&n);
-                while (o < n);
+                scanf("%d", &n);
+                while (o < n)
                 {
-                    if (n%o = 0) printf("%d\n",o)
+                    if (n % o === 0) printf("%d\\n", o)
                     o++;
                 }
             }
@@ -270,7 +280,7 @@ export const codeQuestions_1 =
                 while(i <= (int)sqrt(n) && n % i != 0) {
                     i++
                 }
-                if(n / i == 0) printf("Nem prim");
+                if(n % i == 0) printf("Nem prim");
                 else printf("Prim");
             }
             `,
@@ -320,16 +330,16 @@ export const codeQuestions_1 =
             #include <stdio>
             main()
 			{
-				int n, összeg;
+				int n, osszeg = 0;
 				scanf("%i",&N);
 
 				for(i=0; i<N; ++i)
 				{
 					int buffer;
-					scanf('%d',&buffer);
-					összeg+=buffer;
+					scanf("%d",&buffer)
+					osszeg += buffer
 				}
-				printf("összeg");
+				printf("%d", );
 			}
             `,
             stdin: '3\n12\n13\n5\n',
@@ -343,11 +353,11 @@ export const codeQuestions_1 =
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            main
+            int main()
 			{
 				int a, b, c, legnagyobb;
 				scanf("%d%d%d", a, b, c)
-				legnagyobb = ((a>b && a>c) ? a ? (( b>a && b>c)? b ? c))
+				legnagyobb = ((a>b && a>c) ? a : (( b>a && b>c)? b ? c))
 				printf("%d" legnagyobb);
 			}
             `,

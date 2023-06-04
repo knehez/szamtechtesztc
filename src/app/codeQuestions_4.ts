@@ -205,4 +205,86 @@ export const codeQuestions_4 =
             result: { 'stderr': '', 'stdout': 's', 'exitCode': 0 },
             time: 5 * 60
         },
+        { // 6
+            level: 4,
+            question: `Írjon egy C függvényt, folytatva a megkezdettet, amely kap egy sztringet, majd megvizsgálja, hogy a sztring palindróm-e (azaz ugyanaz, ha visszafelé olvassuk)`,
+            initialCode: `
+            int palindrom(const char* input)
+            {
+                int length = strlen(input);
+
+
+
+            }
+            `,
+            testCode: `
+            #include <string.h>
+            #include <stdio.h>
+            int palindrom(const char* input);
+            int main()
+            {
+                if(palindrom("radar") && !palindrom("radir"))
+                {
+                    return 0;
+                }
+                return 1;
+            }
+            `,
+            stdin: '',
+            solution: `
+            int palindrom(const char* input)
+            {
+                int palindrom = 1;
+                for (int i = 0, j = strlen(input) - 1; i < j; i++, j--) {
+                    if (input[i] != input[j]) {
+                        palindrom = 0;
+                        break;
+                    }
+                }
+                return palindrom;
+            }
+            `,
+            result: { 'stderr': '', 'stdout': '', 'exitCode': 0 },
+            time: 5 * 60
+        },
+        { // 7
+            level: 4,
+            question: `Írjon egy C szamol() függvényt, amely megkap egy sztringet paraméterként, majd kiírja a sztringben található számjegyek összegét.`,
+            initialCode: `
+            int szamjegyekOsszege(const char *sztring) {
+                int i, sum;
+            
+                sum = 0;
+            
+
+
+
+
+
+                return sum;
+            }
+            `,
+            testCode: `
+            #include <stdio.h>
+
+            int szamjegyekOsszege(const char *sztring);
+
+            int main() {
+                char sztring[100];
+
+                fgets(sztring, sizeof(sztring), stdin);
+
+                int osszeg = szamjegyekOsszege(sztring);
+
+                printf("%d", osszeg);
+
+                return 0;
+            }
+            `,
+            stdin: 'asdasdas1scsdf5ssdf8',
+            solution: `
+            `,
+            result: { 'stderr': '', 'stdout': '14', 'exitCode': 0 },
+            time: 5 * 60
+        },
     ];

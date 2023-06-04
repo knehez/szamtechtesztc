@@ -14,13 +14,34 @@ export const codeQuestions_2 =
 
             }
             `,
+            solution: `
+            #include <stdio.h>
+            main()
+            {
+                int tomb[5];
+                
+                for(int i = 0; i<5; i++)
+                {
+                    scanf("%d", &tomb[i]);
+                }
+                
+                int legnagyobb = tomb[0];
+                for(int i = 1; i<5; i++)
+                {
+                    if(legnagyobb < tomb[i])
+                    {
+                        legnagyobb = tomb[i];
+                    }
+                }
+                printf("%d", legnagyobb);
+            }`,
             stdin: '10\n1\n70\n9\n3\n',
             result: { 'stderr': '', 'stdout': '70', 'exitCode': 0 },
             time: 2 * 60
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely beolvas 10 egész számot és kiíratja azokat a beolvasással ellentétes sorrendben (minden szám után új sorba kerüljön).',
+            question: 'Írjon egy C programot, amely beolvas 10 egész számot és kiíratja azokat a beolvasással ellentétes sorrendben (minden szám új sorba kerüljön).',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -35,7 +56,7 @@ export const codeQuestions_2 =
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokból.',
+            question: 'Írjon egy C programot, amely bekér egy "N" számot és NxN méretű négyzetet rajzol csillagokból a konzolba.',
             testCode: '',
             initialCode: `
             #include <stdio.h>

@@ -130,7 +130,7 @@ export class AppComponent {
   checkTestSolution() {
     const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
-    const code = { source: this.codeInput + "\n" + testCode, stdin: stdin };
+    const code = { source: testCode + "\n" + this.codeInput, stdin: stdin };
     this.compilerService.compileCode(code).subscribe((res) => {
       let compilerOutput = res["stderr"]
         .replace(/^.*(\.c|.h):/gm, "[source]")
@@ -154,7 +154,8 @@ export class AppComponent {
     const userSolution = this.randomQuestions[this.currentQuestionIndex].result;
     const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
 
-    const code = { source: this.codeInput + "\n" + testCode, stdin: stdin };
+    const code = { source: testCode + "\n" + this.codeInput, stdin: stdin };
+    console.log(code);
     this.compilerService.compileCode(code).subscribe(
       (solution) => {
         // replace \r\n-s on windows

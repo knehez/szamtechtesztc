@@ -37,7 +37,7 @@ export const codeQuestions_2 =
             }`,
             stdin: '10\n1\n70\n9\n3\n',
             result: { 'stderr': '', 'stdout': '70', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -52,7 +52,7 @@ export const codeQuestions_2 =
             `,
             stdin: '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n',
             result: { 'stderr': '', 'stdout': '9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -67,7 +67,7 @@ export const codeQuestions_2 =
             `,
             stdin: '3',
             result: { 'stderr': '', 'stdout': '***\n***\n***\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -99,7 +99,7 @@ export const codeQuestions_2 =
             `,
             stdin: '9',
             result: { 'stderr': '', 'stdout': '45', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 5
             level: 2,
@@ -114,7 +114,7 @@ export const codeQuestions_2 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '2 4 8 16 32 64 128 256 512 1024 2048 ', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -129,7 +129,7 @@ export const codeQuestions_2 =
             `,
             stdin: '-5\n8',
             result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -144,7 +144,7 @@ export const codeQuestions_2 =
             `,
             stdin: '10\n5',
             result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -159,7 +159,7 @@ export const codeQuestions_2 =
             `,
             stdin: '5\n8',
             result: { 'stderr': '', 'stdout': '40', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -174,7 +174,7 @@ export const codeQuestions_2 =
             `,
             stdin: '5.9\n8.3',
             result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 10
             level: 2,
@@ -201,7 +201,7 @@ export const codeQuestions_2 =
             }
             `,
             result: { 'stderr': '', 'stdout': 'float', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -216,7 +216,7 @@ export const codeQuestions_2 =
             `,
             stdin: 'k',
             result: { 'stderr': '', 'stdout': 'kicsi', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -250,7 +250,7 @@ export const codeQuestions_2 =
             `,
             stdin: '9 - 1',
             result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -265,7 +265,7 @@ export const codeQuestions_2 =
             `,
             stdin: '2486',
             result: { 'stderr': '', 'stdout': '6842', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 2,
@@ -280,7 +280,7 @@ export const codeQuestions_2 =
             `,
             stdin: '7',
             result: { 'stderr': '', 'stdout': '2\n4\n6\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 15
             level: 2,
@@ -295,6 +295,6 @@ export const codeQuestions_2 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': '135', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
     ];

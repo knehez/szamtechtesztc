@@ -14,7 +14,7 @@ sudo su
 git config credential.helper store
 git pull
 
-# rootként a node verziót át kell állítani > 10.x-re
+# rootként a node verziót át kell állítani > 14.x-re
 sudo n
 
 ./node_modules/@angular/cli/bin/ng build --prod --no-sourcemap --base-href "/szamtech-teszt-c/"

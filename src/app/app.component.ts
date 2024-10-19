@@ -101,12 +101,12 @@ export class AppComponent {
     );
     // minden szintből 1-et választunk véletlenszerűen
     for (let i = 1; i <= maxLevel; i++) {
-      // egyes szintekhez tartozó feladatokat sorba rendezzük és 1-et kiválasztunk belőlük
+      // egyes szintekhez tartozó feladatokat sorba rendezzük és 2-t kiválasztunk belőlük
       this.randomQuestions.push(
         ...codeQuestions
           .filter((o) => o.level === i)
           .sort(() => 0.5 - Math.random())
-          .slice(0, 1)
+          .slice(0, i==1 ? 3:2) // az 1-es szintből 3-at választ
       );
     }
     for (const q of this.randomQuestions) {

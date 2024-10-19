@@ -29,7 +29,7 @@ export const codeQuestions_1 =
             `,
             stdin: 'F',
             result: { 'stderr': '', 'stdout': 'karakter:nagy betu', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -48,7 +48,7 @@ export const codeQuestions_1 =
             `,
             stdin: '9',
             result: { 'stderr': '', 'stdout': 'paratlan', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -68,7 +68,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '0 1 2 3 4 5 6 7 8 9 ', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -86,7 +86,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '0123456789', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 5
             level: 1,
@@ -102,7 +102,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': '10', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -125,7 +125,7 @@ export const codeQuestions_1 =
             `,
             stdin: '0\n1\n2\n3\n4\n',
             result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -142,7 +142,7 @@ export const codeQuestions_1 =
             `,
             stdin: '',
             result: { 'stderr': '', 'stdout': 'Januar\tFebruar\tMarcius\n2005\t2003\t2001\n1999\t2001\t1989\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -159,7 +159,7 @@ export const codeQuestions_1 =
             `,
             stdin: '11',
             result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -176,7 +176,7 @@ export const codeQuestions_1 =
             `,
             stdin: '7',
             result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 10
             level: 1,
@@ -204,7 +204,7 @@ export const codeQuestions_1 =
             `,
             stdin: '3.4 1.2',
             result: { 'stderr': '', 'stdout': '2.83', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -223,7 +223,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': '1\n3\n5\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -235,7 +235,7 @@ export const codeQuestions_1 =
             {
                 int i; db = 0; szam;
                 for(i = 0, i < 10, i++) {
-                    scanf("%d",&szam);
+                    scanf("%d", &szam);
                     if (szam>0) db++;
                 }
                 printf("%d",db);
@@ -243,7 +243,7 @@ export const codeQuestions_1 =
             `,
             stdin: '-3 -4 -5 -6 -7 -8 1 2 -2 -10',
             result: { 'stderr': '', 'stdout': '2', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -264,7 +264,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': '2\n3\n', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -286,7 +286,7 @@ export const codeQuestions_1 =
             `,
             stdin: '6',
             result: { 'stderr': '', 'stdout': 'Nem prim', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         { // 15
             level: 1,
@@ -320,7 +320,7 @@ export const codeQuestions_1 =
             `,
             stdin: '12 8',
             result: { 'stderr': '', 'stdout': '24', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
         {
             level: 1,
@@ -344,7 +344,7 @@ export const codeQuestions_1 =
             `,
             stdin: '3\n12\n13\n5\n',
             result: { 'stderr': '', 'stdout': '30', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
 
         {
@@ -363,8 +363,84 @@ export const codeQuestions_1 =
             `,
             stdin: '5\n6\n4\n',
             result: { 'stderr': '', 'stdout': '6', 'exitCode': 0 },
-            time: 2 * 60
+            time: 4 * 60
         },
-
-
+        {
+            level: 1,
+            question: `Az alábbi program kiírná a beolvasott szám kétszeresét, de nem működik. Javítsa ki, mert több elírás is történt.`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int szam;
+                scanf("%d, szam);
+                printf("%d", szam*2)
+            }
+            `,
+            stdin: '4',
+            result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        {
+            level: 1,
+            question: `Az alábbi program bekér egy számot, majd kiírja, hogy a szám pozitív, negatív, vagy nulla. Javítsa ki, mert több elírás is történt.`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            int main()
+            {
+                int x;
+                scanf("%i", &x)
+                if x > 0 {
+                    printf("pozitiv");
+                } else if (x = 0) {
+                    printf("nulla");
+                } else {
+                    printf("negativ");
+                }
+            }
+            `,
+            stdin: '-1',
+            result: { 'stderr': '', 'stdout': 'negativ', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        {
+            level: 1,
+            question: `Az alábbi program kiszámítja két bekért szám összegét és különbségét, de nem működik. Javítsa ki, mert több elírás is történt.`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            main()
+            {
+                int a, b;
+                scanf("%d %d", a b);
+                printf("Osszeg: %d, Kulonbseg: %d", a+b, a-b);
+            }
+            `,
+            stdin: '5 3',
+            result: { 'stderr': '', 'stdout': 'Osszeg: 8, Kulonbseg: 2', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        {
+            level: 1,
+            question: `Az alábbi program bekér két számot, majd eldönti, hogy az első osztja-e a másodikat. Javítsa ki, mert több elírás is történt.`,
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+            int main()
+            {
+                int a, b;
+                scanf("%d %d", a, &b);
+                if b % a == 0 {
+                    printf("oszto");
+                } else {
+                    printf("nem oszto");
+                }
+            }
+            `,
+            stdin: '9 3',
+            result: { 'stderr': '', 'stdout': 'oszto', 'exitCode': 0 },
+            time: 4 * 60
+        }
     ];

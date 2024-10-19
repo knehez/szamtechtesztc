@@ -17,7 +17,7 @@ git pull
 # rootként a node verziót át kell állítani > 14.x-re
 sudo n
 
-./node_modules/@angular/cli/bin/ng build --prod --no-sourcemap --base-href "/szamtech-teszt-c/"
+./node_modules/.bin/ng build --configuration production --base-href "/szamtech-teszt-c/"
 ```
 ha a backend kód változott akkor először le kell állítani a futó szolgáltatást: 
 

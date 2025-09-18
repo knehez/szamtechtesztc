@@ -1,5 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { interval, timer } from "rxjs";
+import { codeQuestions_0 } from "./codeQuestions_0";
 import { codeQuestions_1 } from "./codeQuestions_1";
 import { codeQuestions_2 } from "./codeQuestions_2";
 import { codeQuestions_3 } from "./codeQuestions_3";
@@ -45,6 +46,8 @@ export class AppComponent {
   codeInput: any;
   compilerOutput = "";
   endResult = "";
+  readonly maxRetriesPerQuestion = 2;
+  remainingRetries = 0;
 
   constructor(
     private compilerService: CompilerService,
@@ -74,6 +77,7 @@ export class AppComponent {
     this.testStarted = true;
     // collect questions
     const codeQuestions = [];
+    codeQuestions.push(...codeQuestions_0);
     codeQuestions.push(...codeQuestions_1);
     codeQuestions.push(...codeQuestions_2);
     codeQuestions.push(...codeQuestions_3);
@@ -100,13 +104,13 @@ export class AppComponent {
       })
     );
     // minden szintből 1-et választunk véletlenszerűen
-    for (let i = 1; i <= maxLevel; i++) {
+    for (let i = 0; i <= maxLevel; i++) {
       // egyes szintekhez tartozó feladatokat sorba rendezzük és 2-t kiválasztunk belőlük
       this.randomQuestions.push(
         ...codeQuestions
           .filter((o) => o.level === i)
           .sort(() => 0.5 - Math.random())
-          .slice(0, i==1 ? 3:2) // az 1-es szintből 3-at választ
+          .slice(0, i==1 || i == 0 ? 3:2) // az 1-es és 0. szintből 3-at választ
       );
     }
     for (const q of this.randomQuestions) {
@@ -122,7 +126,15 @@ export class AppComponent {
     this.startCountdownTimer();
   }
 
+  stopTimer() {
+    if (this.timerStream) {
+      this.timerStream.unsubscribe();
+      this.timerStream = null;
+    }
+  }
+
   startCountdownTimer() {
+    this.stopTimer();
     const timer_ = interval(1000);
     this.timerStream = timer_.subscribe((t) => this.tickerFunc(t));
   }
@@ -148,7 +160,6 @@ export class AppComponent {
   }
 
   checkCodeSolution() {
-    this.timerStream.unsubscribe();
     this.compilerOutput = "";
     const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
     const userSolution = this.randomQuestions[this.currentQuestionIndex].result;
@@ -158,20 +169,47 @@ export class AppComponent {
     console.log(code);
     this.compilerService.compileCode(code).subscribe(
       (solution) => {
-        // replace \r\n-s on windows
-        solution.stdout = solution.stdout.replace(/(\r)/g, '');
-        // solution is OK whether these 3 properties are equuals
-        // sample solution from the backend: { 'stderr': '', 'stdout': 'xxxx', 'exitCode': 0 },
-        if (
+        const normalizedStdout =
+          solution && solution.stdout
+            ? solution.stdout.replace(/(\r)/g, "")
+            : "";
+        const normalizedStderr =
+          solution && typeof solution.stderr === "string"
+            ? solution.stderr
+            : solution && solution.stderr !== undefined && solution.stderr !== null
+            ? String(solution.stderr)
+            : "";
+        const normalizedExitCode =
+          solution && typeof solution.exitCode === "number"
+            ? solution.exitCode
+            : solution && solution.exitCode !== undefined && solution.exitCode !== null
+            ? Number(solution.exitCode)
+            : undefined;
+
+        solution.stdout = normalizedStdout;
+        solution.stderr = normalizedStderr;
+        solution.exitCode = normalizedExitCode;
+
+        const isCorrect =
           solution.stderr === userSolution.stderr &&
           solution.stdout === userSolution.stdout &&
-          solution.exitCode === userSolution.exitCode
-        ) {
+          solution.exitCode === userSolution.exitCode;
+
+        if (isCorrect) {
+          this.correctAnswers++;
+          this.stopTimer();
           this.showDialog("A válasza helyes", () => {
             this.goNextQuestion();
           });
-          this.correctAnswers++;
+        } else if (this.remainingRetries > 0) {
+          this.remainingRetries--;
+          const attemptsLeft = this.remainingRetries;
+          this.showDialog(
+            "A válasza helytelen. Hátralévő próbálkozások: " + attemptsLeft,
+            () => {}
+          );
         } else {
+          this.stopTimer();
           this.showDialog("A válasza helytelen", () => {
             this.goNextQuestion();
           });
@@ -202,6 +240,7 @@ export class AppComponent {
   setUpNextQuestion() {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
+    this.remainingRetries = this.maxRetriesPerQuestion;
     // egyszerű feleltválasztós teszt
 
     if (currentQuestion.initialCode !== undefined) {
@@ -259,14 +298,19 @@ export class AppComponent {
 
   tickerFunc(t) {
     this.endResult = this.result + this.randomSpaces();
-    // 60 másodperctől számol vissza
+    // 60 m�sodperct�l sz�mol vissza
     const time =
       this.randomQuestions[this.currentQuestionIndex].time === undefined
         ? 60
         : this.randomQuestions[this.currentQuestionIndex].time;
     this.countdown = time * 1000 - t * 1000;
-    if (this.countdown === 0) {
-      this.checkCodeSolution();
+    if (this.countdown <= 0) {
+      this.countdown = 0;
+      this.stopTimer();
+      this.showDialog('Lejárt az idő, a válasza helytelen', () => {
+        this.goNextQuestion();
+      });
+      return;
     }
   }
 

@@ -220,7 +220,7 @@ export const codeQuestions_2 =
         },
         {
             level: 2,
-            question: 'Írjon egy C programot, amely elvégzi az összeadás és kivonás műveletet. Mintabemenet: 4 - 2',
+            question: 'Írjon egy C programot, amely elvégzi az összeadás és kivonás műveletet. A felhasználó ilyen bemenetet adhat: 4 - 2',
             testCode: '',
             solution: `
             #include <stdio.h>
@@ -297,4 +297,280 @@ export const codeQuestions_2 =
             result: { 'stderr': '', 'stdout': '135', 'exitCode': 0 },
             time: 4 * 60
         },
+        { // 16
+            level: 2,
+            question: 'Irjon egy C programot, amely beolvas egy egész számot és kiirja a számjegyeinek összegét.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int n;
+                if (scanf("%d", &n) != 1) {
+                    return 0;
+                }
+                if (n < 0) {
+                    n = -n;
+                }
+                int sum = 0;
+                while (n > 0) {
+                    sum += n % 10;
+                    n /= 10;
+                }
+                printf("%d", sum);
+                return 0;
+            }
+            `,
+            stdin: '572',
+            result: { 'stderr': '', 'stdout': '14', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 17
+            level: 2,
+            question: 'Irjon egy C programot, amely első sorban beolvas egy N értéket, majd N darab egész számot és megszámolja, hány pozitív volt közülük.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int n;
+                if (scanf("%d", &n) != 1) {
+                    return 0;
+                }
+                int count = 0;
+                for (int i = 0; i < n; ++i) {
+                    int value;
+                    if (scanf("%d", &value) != 1) {
+                        value = 0;
+                    }
+                    if (value > 0) {
+                        count++;
+                    }
+                }
+                printf("%d", count);
+                return 0;
+            }
+            `,
+            stdin: '5 -2 3 0 7 -1',
+            result: { 'stderr': '', 'stdout': '2', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 18
+            level: 2,
+            question: 'Irjon egy C programot, amely Celsius fokrol Fahrenheit fokra vált és két tizedes pontossággal kiirja az eredmenyt.</br>Fahrenheit = Celsius * 9/5 + 32',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                float celsius;
+                if (scanf("%f", &celsius) != 1) {
+                    return 0;
+                }
+                float fahrenheit = celsius * 9.0f / 5.0f + 32.0f;
+                printf("%.2f", fahrenheit);
+                return 0;
+            }
+            `,
+            stdin: '26.5',
+            result: { 'stderr': '', 'stdout': '79.70', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 19
+            level: 2,
+            question: 'Irjon egy C programot, amely beolvas egy szó hosszú karakterláncot és megszámolja benne a magánhangzók számát (a, e, i, o, u, kis- és nagybetű).',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                char word[201];
+                if (scanf("%200s", word) != 1) {
+                    return 0;
+                }
+                int count = 0;
+                for (int i = 0; word[i] != NULL; ++i) {
+                    char c = word[i];
+                    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                        c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+                        count++;
+                    }
+                }
+                printf("%d", count);
+                return 0;
+            }
+            `,
+            stdin: 'programozas',
+            result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 20
+            level: 2,
+            question: 'Irjon egy C programot, amely két egész számot olvas be és kiirja az összes egész számot a két érték között, beleértve a határokat is.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int a, b;
+                if (scanf("%d %d", &a, &b) != 2) {
+                    return 0;
+                }
+                for (int i = a; i <= b; ++i) {
+                    printf("%d ", i);
+                }
+                return 0;
+            }
+            `,
+            stdin: '3 7',
+            result: { 'stderr': '', 'stdout': '3 4 5 6 7 ', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 21
+            level: 2,
+            question: 'Irjon egy C programot, amely kiszámolja egy beolvasott N szám faktoriálisát.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int n;
+                if (scanf("%d", &n) != 1) {
+                    return 0;
+                }
+                unsigned long long fact = 1;
+                for (int i = 2; i <= n; ++i) {
+                    fact *= i;
+                }
+                printf("%llu", fact);
+                return 0;
+            }
+            `,
+            stdin: '6',
+            result: { 'stderr': '', 'stdout': '720', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 22
+            level: 2,
+            question: 'Irjon egy C programot, amely első sorban beolvas egy N értéket, majd N darab valós számot és kiirja az összegüket két tizedesjeggyel.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int n;
+                if (scanf("%d", &n) != 1) {
+                    return 0;
+                }
+                double sum = 0.0;
+                for (int i = 0; i < n; ++i) {
+                    double value;
+                    if (scanf("%lf", &value) != 1) {
+                        value = 0.0;
+                    }
+                    sum += value;
+                }
+                printf("%.2f", sum);
+                return 0;
+            }
+            `,
+            stdin: '3 1.5 2.5 3.0',
+            result: { 'stderr': '', 'stdout': '7.00', 'exitCode': 0 },
+            time: 4 * 60
+        },
+        { // 24
+            level: 2,
+            question: 'Irjon egy C programot, amely egy beolvasott számhoz elkészíti a szorzótábláját 1-től 10-ig, minden eredményt külön sorba írva.',
+            testCode: '',
+            initialCode: `
+            #include <stdio.h>
+
+            int main(void) {
+                // TODO: write your solution here
+                return 0;
+            }
+            `,
+            solution: `
+            #include <stdio.h>
+
+            int main(void)
+            {
+                int n;
+                if (scanf("%d", &n) != 1) {
+                    return 0;
+                }
+                for (int i = 1; i <= 10; ++i) {
+                    printf("%d*%d=%d\n", n, i, n * i);
+                }
+                return 0;
+            }
+            `,
+            stdin: '4',
+            result: { 'stderr': '', 'stdout': '4*1=4\n4*2=8\n4*3=12\n4*4=16\n4*5=20\n4*6=24\n4*7=28\n4*8=32\n4*9=36\n4*10=40\n', 'exitCode': 0 },
+            time: 4 * 60
+        }
     ];
+

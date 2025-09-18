@@ -287,4 +287,314 @@ export const codeQuestions_4 =
             result: { 'stderr': '', 'stdout': '14', 'exitCode': 0 },
             time: 5 * 60
         },
+
+        { // 8
+            level: 4,
+            question: 'Írjon egy "int maganhangzo_szamlal(const char*)" nevű függvényt, amely visszaadja, hány magánhangzó található a kapott szövegben (a, e, i, o, u betűk kis- és nagybetűs változata).',
+            testCode: `
+            #include <stdio.h>
+            int maganhangzo_szamlal(const char* szoveg);
+            int main(void)
+            {
+                printf("%d", maganhangzo_szamlal("Programozas"));
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            int maganhangzo_szamlal(const char *szoveg)
+            {
+                int darab = 0;
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    char c = szoveg[i];
+                    if (c == 'a' || c == 'A' || c == 'e' || c == 'E' ||
+                        c == 'i' || c == 'I' || c == 'o' || c == 'O' ||
+                        c == 'u' || c == 'U') {
+                        ++darab;
+                    }
+                }
+                return darab;
+            }
+            `,
+            result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 9
+            level: 4,
+            question: 'Írjon egy "void kisbetusit(char*)" nevű függvényt, amely minden karaktert kisbetűssé alakít a kapott szövegben.',
+            testCode: `
+            #include <stdio.h>
+            #include <ctype.h>
+            void kisbetusit(char* szoveg);
+            int main(void)
+            {
+                char szoveg[] = "Szia Vilag!";
+                kisbetusit(szoveg);
+                printf("%s", szoveg);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            #include <ctype.h>
+            void kisbetusit(char *szoveg)
+            {
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    szoveg[i] = (char)tolower((unsigned char)szoveg[i]);
+                }
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'szia vilag!', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 10
+            level: 4,
+            question: 'Írjon egy "void eltavolit_karakter(char*, char)" nevű függvényt, amely eltávolítja a megadott karakter minden előfordulását a szövegből.',
+            testCode: `
+            #include <stdio.h>
+            void eltavolit_karakter(char* szoveg, char c);
+            int main(void)
+            {
+                char szoveg[] = "banan";
+                eltavolit_karakter(szoveg, 'a');
+                printf("%s", szoveg);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            void eltavolit_karakter(char *szoveg, char c)
+            {
+                int j = 0;
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    if (szoveg[i] != c) {
+                        szoveg[j++] = szoveg[i];
+                    }
+                }
+                szoveg[j] = '\0';
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'bnn', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 11
+            level: 4,
+            question: 'Írjon egy "int suffixel(const char*, const char*)" nevű függvényt, amely 1-et ad vissza, ha az első szöveg utolsó karakterei megegyeznek a másodikkal, különben 0-t.',
+            testCode: `
+            #include <stdio.h>
+            int suffixel(const char* szoveg, const char* suf);
+            int main(void)
+            {
+                printf("%d", suffixel("programozas", "zas"));
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            int suffixel(const char *szoveg, const char *suf)
+            {
+                int n = 0;
+                while (szoveg[n] != '\0') {
+                    ++n;
+                }
+                int m = 0;
+                while (suf[m] != '\0') {
+                    ++m;
+                }
+                if (m > n) {
+                    return 0;
+                }
+                for (int i = 0; i < m; ++i) {
+                    if (szoveg[n - m + i] != suf[i]) {
+                        return 0;
+                    }
+                }
+                return 1;
+            }
+            `,
+            result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 12
+            level: 4,
+            question: 'Írjon egy "void rovidit(char*, int)" nevű függvényt, amely a megadott hosszra csonkolja a szöveget (és lezárja nullával).',
+            testCode: `
+            #include <stdio.h>
+            void rovidit(char* szoveg, int hossz);
+            int main(void)
+            {
+                char szoveg[] = "program";
+                rovidit(szoveg, 4);
+                printf("%s", szoveg);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            void rovidit(char *szoveg, int hossz)
+            {
+                if (hossz < 0) {
+                    hossz = 0;
+                }
+                szoveg[hossz] = '\0';
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'prog', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 13
+            level: 4,
+            question: 'Írjon egy "int csak_alphanumerikus(const char*)" nevű függvényt, amely 1-et ad vissza, ha a szöveg minden karaktere betű vagy szám, különben 0-t.',
+            testCode: `
+            #include <stdio.h>
+            #include <ctype.h>
+            int csak_alphanumerikus(const char* szoveg);
+            int main(void)
+            {
+                printf("%d", csak_alphanumerikus("abc123"));
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            int csak_alphanumerikus(const char *szoveg)
+            {
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    if (!isalnum((unsigned char)szoveg[i])) {
+                        return 0;
+                    }
+                }
+                return 1;
+            }
+            `,
+            result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 14
+            level: 4,
+            question: 'Írjon egy "void szokozok_torol(char*)" nevű függvényt, amely eltávolítja a szövegből az összes szóközt.',
+            testCode: `
+            #include <stdio.h>
+            void szokozok_torol(char* szoveg);
+            int main(void)
+            {
+                char szoveg[] = "a b  c";
+                szokozok_torol(szoveg);
+                printf("%s", szoveg);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            void szokozok_torol(char *szoveg)
+            {
+                int j = 0;
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    if (szoveg[i] != ' ') {
+                        szoveg[j++] = szoveg[i];
+                    }
+                }
+                szoveg[j] = '\0';
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'abc', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 15
+            level: 4,
+            question: 'Írjon egy "int leghosszabb_szo(const char*)" nevű függvényt, amely visszaadja a leghosszabb szó hosszát a szóközökkel elválasztott szövegben.',
+            testCode: `
+            #include <stdio.h>
+            int leghosszabb_szo(const char* szoveg);
+            int main(void)
+            {
+                printf("%d", leghosszabb_szo("ez egy feladat"));
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            int leghosszabb_szo(const char *szoveg)
+            {
+                int max = 0;
+                int akt = 0;
+                for (int i = 0;; ++i) {
+                    char c = szoveg[i];
+                    if (c != '\0' && c != ' ') {
+                        ++akt;
+                    } else {
+                        if (akt > max) {
+                            max = akt;
+                        }
+                        if (c == '\0') {
+                            break;
+                        }
+                        akt = 0;
+                    }
+                }
+                return max;
+            }
+            `,
+            result: { 'stderr': '', 'stdout': '7', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 16
+            level: 4,
+            question: 'Írjon egy "void karakter_csere(char*, char, char)" nevű függvényt, amely a régi karaktert az újra cseréli a szövegben.',
+            testCode: `
+            #include <stdio.h>
+            void karakter_csere(char* szoveg, char regi, char uj);
+            int main(void)
+            {
+                char szoveg[] = "cica";
+                karakter_csere(szoveg, 'c', 'k');
+                printf("%s", szoveg);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            void karakter_csere(char *szoveg, char regi, char uj)
+            {
+                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                    if (szoveg[i] == regi) {
+                        szoveg[i] = uj;
+                    }
+                }
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'kika', 'exitCode': 0 },
+            time: 3 * 60
+        },
+        { // 17
+            level: 4,
+            question: 'Írjon egy "void fordit_masol(const char*, char*)" nevű függvényt, amely a forrás szöveget megfordítva másolja a cél tömbbe.',
+            testCode: `
+            #include <stdio.h>
+            #include <string.h>
+            void fordit_masol(const char* forras, char* cel);
+            int main(void)
+            {
+                char cel[20];
+                fordit_masol("korte", cel);
+                printf("%s", cel);
+                return 0;
+            }
+            `,
+            stdin: '',
+            solution: `
+            #include <string.h>
+            void fordit_masol(const char *forras, char *cel)
+            {
+                int hosszn = (int)strlen(forras);
+                for (int i = 0; i < hosszn; ++i) {
+                    cel[i] = forras[hosszn - 1 - i];
+                }
+                cel[hosszn] = '\0';
+            }
+            `,
+            result: { 'stderr': '', 'stdout': 'etrok', 'exitCode': 0 },
+            time: 3 * 60
+        }
+
     ];

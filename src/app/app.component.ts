@@ -1,5 +1,5 @@
-import { Component, ViewChild } from "@angular/core";
-import { interval, timer } from "rxjs";
+import { Component, OnDestroy } from "@angular/core";
+import { interval, Subscription } from "rxjs";
 import { codeQuestions_0 } from "./codeQuestions_0";
 import { codeQuestions_1 } from "./codeQuestions_1";
 import { codeQuestions_2 } from "./codeQuestions_2";
@@ -30,7 +30,7 @@ export interface IContext {
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   userName = "";
   testStarted: Boolean = false;
   questionsInTest = 0;
@@ -48,6 +48,18 @@ export class AppComponent {
   endResult = "";
   readonly maxRetriesPerQuestion = 2;
   remainingRetries = 0;
+  isCompiling = false;
+  dialogOpen = false;
+  questionClosed = true;
+  private deadline = 0;
+  private requestId = 0;
+  private requests = new Subscription();
+  private destroyed = false;
+
+  get canRun(): boolean {
+    return this.testStarted && !this.testFinished && !this.questionClosed &&
+      !this.isCompiling && !this.dialogOpen;
+  }
 
   constructor(
     private compilerService: CompilerService,
@@ -61,7 +73,7 @@ export class AppComponent {
       "/" +
       this.questionsInTest +
       " (" +
-      ((this.correctAnswers * 100) / this.questionsInTest).toPrecision(2) +
+      (this.questionsInTest ? (this.correctAnswers * 100 / this.questionsInTest) : 0).toFixed(1) +
       "%)"
     );
   }
@@ -103,13 +115,12 @@ export class AppComponent {
         return o.level;
       })
     );
-    // minden szintből 1-et választunk véletlenszerűen
+    // A 0. és 1. szintből 3, a többi szintből 2 kérdést választunk.
     for (let i = 0; i <= maxLevel; i++) {
       // egyes szintekhez tartozó feladatokat sorba rendezzük és 2-t kiválasztunk belőlük
       this.randomQuestions.push(
-        ...codeQuestions
-          .filter((o) => o.level === i)
-          .sort(() => 0.5 - Math.random())
+        ...this.shuffleQuestions(codeQuestions.filter((o) => o.level === i))
+          .map((question) => ({ ...question }))
           .slice(0, i==1 || i == 0 ? 3:2) // az 1-es és 0. szintből 3-at választ
       );
     }
@@ -135,111 +146,129 @@ export class AppComponent {
 
   startCountdownTimer() {
     this.stopTimer();
-    const timer_ = interval(1000);
-    this.timerStream = timer_.subscribe((t) => this.tickerFunc(t));
+    const time = this.randomQuestions[this.currentQuestionIndex].time ?? 60;
+    this.deadline = Date.now() + time * 1000;
+    this.countdown = time * 1000;
+    this.endResult = this.result;
+    this.timerStream = interval(1000).subscribe(() => this.tickerFunc());
+  }
+
+  private cancelRequests() {
+    this.requestId++;
+    this.requests.unsubscribe();
+    this.requests = new Subscription();
+    this.isCompiling = false;
+  }
+
+  private receiveResponse(questionIndex: number, requestId: number): boolean {
+    if (this.destroyed || this.questionClosed || this.testFinished ||
+        questionIndex !== this.currentQuestionIndex || requestId !== this.requestId) {
+      return false;
+    }
+    this.tickerFunc();
+    return !this.questionClosed;
   }
 
   checkTestSolution() {
-    const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
-    const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
-    const code = { source: testCode + "\n" + this.codeInput, stdin: stdin };
-    this.compilerService.compileCode(code).subscribe((res) => {
-      let compilerOutput = res["stderr"]
-        .replace(/^.*(\.c|.h):/gm, "[source]")
-        .replace(/(\r\n|\n)/g, "<br />");
-        
-        compilerOutput = "Compiler output:<br/>" + compilerOutput;
-
-        // show executable program's output
-        let executableOutput = res["stdout"]
-        .replace(/^.*(\.c|.h):/gm, "[source]")
-        .replace(/(\r\n|\n)/g, "<br />");
-
-        this.compilerOutput = compilerOutput + "<br/>Executable output: </br>" + executableOutput;
-    });
+    if (!this.canRun) { return; }
+    this.tickerFunc();
+    if (this.questionClosed) { return; }
+    const questionIndex = this.currentQuestionIndex;
+    const requestId = ++this.requestId;
+    const question = this.randomQuestions[questionIndex];
+    this.isCompiling = true;
+    this.requests.add(this.compilerService.compileCode({
+      source: question.testCode + "\n" + this.codeInput, stdin: question.stdin
+    }).subscribe((res) => {
+      if (!this.receiveResponse(questionIndex, requestId)) { return; }
+      this.isCompiling = false;
+      const stderr = String(res?.stderr ?? "").replace(/^.*(\.c|\.h):/gm, "[source]");
+      this.compilerOutput = "Compiler output:\n" + stderr +
+        "\nExecutable output:\n" + String(res?.stdout ?? "");
+    }, () => {
+      if (!this.receiveResponse(questionIndex, requestId)) { return; }
+      this.isCompiling = false;
+      this.compilerOutput = "A fordítószolgáltatás nem érhető el. Próbálja újra.";
+    }));
   }
 
   checkCodeSolution() {
+    if (!this.canRun) { return; }
+    this.tickerFunc();
+    if (this.questionClosed) { return; }
     this.compilerOutput = "";
-    const stdin = this.randomQuestions[this.currentQuestionIndex].stdin;
-    const userSolution = this.randomQuestions[this.currentQuestionIndex].result;
-    const testCode = this.randomQuestions[this.currentQuestionIndex].testCode;
-
-    const code = { source: testCode + "\n" + this.codeInput, stdin: stdin };
-    console.log(code);
-    this.compilerService.compileCode(code).subscribe(
-      (solution) => {
-        const normalizedStdout =
-          solution && solution.stdout
-            ? solution.stdout.replace(/(\r)/g, "")
-            : "";
-        const normalizedStderr =
-          solution && typeof solution.stderr === "string"
-            ? solution.stderr
-            : solution && solution.stderr !== undefined && solution.stderr !== null
-            ? String(solution.stderr)
-            : "";
-        const normalizedExitCode =
-          solution && typeof solution.exitCode === "number"
-            ? solution.exitCode
-            : solution && solution.exitCode !== undefined && solution.exitCode !== null
-            ? Number(solution.exitCode)
-            : undefined;
-
-        solution.stdout = normalizedStdout;
-        solution.stderr = normalizedStderr;
-        solution.exitCode = normalizedExitCode;
-
-        const isCorrect =
-          solution.stderr === userSolution.stderr &&
-          solution.stdout === userSolution.stdout &&
-          solution.exitCode === userSolution.exitCode;
-
+    const questionIndex = this.currentQuestionIndex;
+    const requestId = ++this.requestId;
+    const question = this.randomQuestions[questionIndex];
+    const source = question.testCode + "\n" + this.codeInput;
+    const testCases = [{ stdin: question.stdin, result: question.result },
+      ...(question.testCases ?? [])];
+    this.isCompiling = true;
+    const runCase = (index: number) => {
+      this.requests.add(this.compilerService.compileCode({
+        source, stdin: testCases[index].stdin
+      }).subscribe((solution) => {
+        if (!this.receiveResponse(questionIndex, requestId)) { return; }
+        const expected = testCases[index].result;
+        const isCorrect = solution != null &&
+          String(solution.stdout ?? "").replace(/\r/g, "") === expected.stdout.replace(/\r/g, "") &&
+          String(solution.stderr ?? "") === expected.stderr &&
+          solution.exitCode !== undefined && solution.exitCode !== null &&
+          Number(solution.exitCode) === expected.exitCode;
+        if (isCorrect && index + 1 < testCases.length) {
+          runCase(index + 1);
+          return;
+        }
+        this.isCompiling = false;
         if (isCorrect) {
           this.correctAnswers++;
-          this.stopTimer();
-          this.showDialog("A válasza helyes", () => {
-            this.goNextQuestion();
-          });
+          this.finishQuestion("A válasza helyes");
         } else if (this.remainingRetries > 0) {
           this.remainingRetries--;
-          const attemptsLeft = this.remainingRetries;
-          this.showDialog(
-            "A válasza helytelen. Hátralévő próbálkozások: " + attemptsLeft,
-            () => {}
-          );
+          this.showDialog("A válasza helytelen. Hátralévő próbálkozások: " +
+            this.remainingRetries, () => {});
         } else {
-          this.stopTimer();
-          this.showDialog("A válasza helytelen", () => {
-            this.goNextQuestion();
-          });
+          this.finishQuestion("A válasza helytelen");
         }
-      },
-      (err) => {
-        this.showDialog(err, () => {});
-      }
-    );
+      }, () => {
+        if (!this.receiveResponse(questionIndex, requestId)) { return; }
+        this.isCompiling = false;
+        this.compilerOutput = "A fordítószolgáltatás nem érhető el. Próbálja újra.";
+      }));
+    };
+    runCase(0);
+  }
+
+  private finishQuestion(message: string) {
+    if (this.questionClosed) { return; }
+    this.questionClosed = true;
+    this.stopTimer();
+    this.cancelRequests();
+    this.endResult = this.result;
+    this.showDialog(message, () => this.goNextQuestion());
   }
 
   goNextQuestion() {
+    if (!this.questionClosed || this.testFinished || this.destroyed) { return; }
+    this.stopTimer();
+    this.cancelRequests();
     if (this.currentQuestionIndex < this.questionsInTest - 1) {
-      this.codeInput = "";
       this.currentQuestionIndex++;
       this.setUpNextQuestion();
       this.startCountdownTimer();
     } else {
       this.testFinished = true;
+      this.endResult = this.result;
       this.showDialog("Vége a tesztnek", () => {});
-      const timer_ = interval(1000);
-      this.timerStream = timer_.subscribe((t) =>
-        this.tickerFuncProtectResult(t)
-      );
     }
   }
 
   setUpNextQuestion() {
     const currentQuestion = this.randomQuestions[this.currentQuestionIndex];
     this.currentAnswers = [];
+    this.questionClosed = false;
+    this.compilerOutput = "";
+    this.codeInput = "";
     this.remainingRetries = this.maxRetriesPerQuestion;
     // egyszerű feleltválasztós teszt
 
@@ -259,65 +288,55 @@ export class AppComponent {
   }
 
   removeWhiteCharsFromLineStarts(str: string): string {
-    const tmp = str;
-    const splittedStr = tmp.split("\n");
-    if (splittedStr.length === 1) {
-      return str;
+    const lines = str.replace(/\r/g, "").split("\n");
+    while (lines.length && !lines[0].trim()) { lines.shift(); }
+    while (lines.length && !lines[lines.length - 1].trim()) { lines.pop(); }
+    const firstLineHasNoIndent = lines.length > 0 && lines[0].search(/\S/) === 0;
+    const body = firstLineHasNoIndent ? lines.slice(1) : lines;
+    const indentedLines = body.filter((line) => line.trim());
+    const indent = indentedLines.length
+      ? Math.min(...indentedLines.map((line) => line.search(/\S/))) : 0;
+    const formatted = body.map((line) => line.slice(indent));
+    return (firstLineHasNoIndent ? [lines[0], ...formatted] : formatted).join("\n");
+  }
+
+  private shuffleQuestions<T>(questions: T[]): T[] {
+    const shuffled = questions.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    const numberOfWhiteSpaces = splittedStr[1].search(/\S/);
-    return (
-      splittedStr[0] +
-      splittedStr
-        .slice(1)
-        .map((t) => t.substring(numberOfWhiteSpaces))
-        .join("\n")
-        .trim()
-    );
+    return shuffled;
   }
 
-  getRandomQuestionIndices(maxIndex) {
-    const questionIndices = [];
-    for (let i = 0; i < maxIndex; i++) {
-      questionIndices.push(i);
-    }
-    return questionIndices.sort(() => 0.5 - Math.random());
-  }
-
-  randomSpaces() {
-    const n = Math.floor(Math.random() * 10 + 1);
-    let ret = "";
-    for (let i = 0; i < n; i++) {
-      ret += " ";
-    }
-    return ret;
-  }
-
-  tickerFuncProtectResult(t) {
-    this.endResult = this.result + this.randomSpaces();
-  }
-
-  tickerFunc(t) {
-    this.endResult = this.result + this.randomSpaces();
-    // 60 m�sodperct�l sz�mol vissza
-    const time =
-      this.randomQuestions[this.currentQuestionIndex].time === undefined
-        ? 60
-        : this.randomQuestions[this.currentQuestionIndex].time;
-    this.countdown = time * 1000 - t * 1000;
-    if (this.countdown <= 0) {
-      this.countdown = 0;
-      this.stopTimer();
-      this.showDialog('Lejárt az idő, a válasza helytelen', () => {
-        this.goNextQuestion();
-      });
-      return;
+  tickerFunc() {
+    if (this.questionClosed || this.testFinished || this.destroyed) { return; }
+    this.countdown = Math.max(0, Math.ceil((this.deadline - Date.now()) / 1000) * 1000);
+    this.endResult = this.result;
+    if (this.countdown === 0) {
+      this.finishQuestion("Lejárt az idő, a válasza helytelen");
     }
   }
 
-  showDialog(title: string, callbackFunction: any) {
+  ngOnDestroy() {
+    this.destroyed = true;
+    this.stopTimer();
+    this.cancelRequests();
+    this.confirmationService.close();
+  }
+
+  showDialog(title: string, callbackFunction: () => void) {
+    this.dialogOpen = true;
+    const questionIndex = this.currentQuestionIndex;
+    const requestId = this.requestId;
+    let accepted = false;
     this.confirmationService.confirm({
       message: title,
       accept: () => {
+        if (accepted || this.destroyed || questionIndex !== this.currentQuestionIndex ||
+            requestId !== this.requestId) { return; }
+        accepted = true;
+        this.dialogOpen = false;
         callbackFunction();
       },
     });

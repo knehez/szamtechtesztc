@@ -266,28 +266,6 @@ export const codeQuestions_1 =
             result: { 'stderr': '', 'stdout': '2\n3\n', 'exitCode': 0 },
             time: 4 * 60
         },
-        {
-            level: 1,
-            question: 'Az alábbi program beolvas egy számot és eldönti, hogy prím-e. Javítsa ki, mert több elírás is történt.',
-            testCode: '',
-            initialCode: `
-            #include <stdio.h>
-            #include <math.h>
-            main()
-            {
-                int n, i = 2;
-                scanf("%d", n);
-                while(i <= (int)sqrt(n) && n % i != 0) {
-                    i++
-                }
-                if(n % i == 0) printf("Nem prim");
-                else printf("Prim");
-            }
-            `,
-            stdin: '6',
-            result: { 'stderr': '', 'stdout': 'Nem prim', 'exitCode': 0 },
-            time: 4 * 60
-        },
         { // 15
             level: 1,
             question: 'Az alábbi program két szám legkisebb közös többszörösét írná ki. Javítsa ki, mert több elírás is történt.',

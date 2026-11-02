@@ -51,21 +51,21 @@
       </tr>
       <tr align="center">
         <td *ngIf="true">
-          <button pButton type="button" class="p-button-outlined" [disabled]="testFinished" label="Próba fordítás és futtatás" (click)="checkTestSolution()"></button>
+          <button pButton type="button" class="p-button-outlined" [disabled]="!canRun" label="Próba fordítás és futtatás" (click)="checkTestSolution()"></button>
         </td>
         <td colspan="2">
-          <button pButton type="button" class="p-button-outlined" [disabled]="testFinished" label="Válasz beküldés" (click)="checkCodeSolution()"></button>
+          <button pButton type="button" class="p-button-outlined" [disabled]="!canRun" label="Válasz beküldés" (click)="checkCodeSolution()"></button>
         </td>
       </tr>
       <tr>
         <td colspan="2" *ngIf="compilerOutput != ''">
-          <pre [innerHtml]="compilerOutput"></pre>
+          <pre>{{compilerOutput}}</pre>
         </td>
       </tr>
     </table>
     <h3 class="small-divider center">Válaszra felhasználható idő még {{countdown / 1000}} másodperc</h3>
   </div>
-  <p-confirmDialog #cd [style]="{width: '50vw'}">
+  <p-confirmDialog #cd [closable]="false" [closeOnEscape]="false" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
         <h3>Eredmény</h3>
     </ng-template>

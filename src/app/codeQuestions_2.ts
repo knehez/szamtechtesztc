@@ -36,6 +36,7 @@ export const codeQuestions_2 =
                 printf("%d", legnagyobb);
             }`,
             stdin: '10\n1\n70\n9\n3\n',
+            testCases: [{ stdin: "-8 -3 -12 -4 -9", result: { stderr: "", stdout: "-3", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '70', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -51,6 +52,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n',
+            testCases: [{ stdin: "10 20 30 40 50 60 70 80 90 100", result: { stderr: "", stdout: "100\n90\n80\n70\n60\n50\n40\n30\n20\n10\n", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '9\n8\n7\n6\n5\n4\n3\n2\n1\n0\n', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -66,6 +68,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '3',
+            testCases: [{ stdin: "2", result: { stderr: "", stdout: "**\n**\n", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '***\n***\n***\n', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -98,6 +101,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '9',
+            testCases: [{ stdin: "4", result: { stderr: "", stdout: "10", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '45', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -128,6 +132,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '-5\n8',
+            testCases: [{ stdin: "7 -2", result: { stderr: "", stdout: "5", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '3', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -143,6 +148,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '10\n5',
+            testCases: [{ stdin: "3 8", result: { stderr: "", stdout: "-5", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -158,6 +164,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '5\n8',
+            testCases: [{ stdin: "-3 4", result: { stderr: "", stdout: "-12", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '40', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -173,6 +180,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '5.9\n8.3',
+            testCases: [{ stdin: "9 2", result: { stderr: "", stdout: "4.500000", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '0.710843', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -200,6 +208,7 @@ export const codeQuestions_2 =
                 else printf("float");
             }
             `,
+            testCases: [{ stdin: "7", result: { stderr: "", stdout: "int", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': 'float', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -215,6 +224,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: 'k',
+            testCases: [{ stdin: "K", result: { stderr: "", stdout: "nagy", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': 'kicsi', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -249,6 +259,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '9 - 1',
+            testCases: [{ stdin: "4 + 2", result: { stderr: "", stdout: "6", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '8', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -264,6 +275,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '2486',
+            testCases: [{ stdin: "123", result: { stderr: "", stdout: "321", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '6842', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -279,6 +291,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '7',
+            testCases: [{ stdin: "4", result: { stderr: "", stdout: "2\n4\n", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '2\n4\n6\n', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -294,6 +307,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '6',
+            testCases: [{ stdin: "7", result: { stderr: "", stdout: "1357", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '135', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -331,6 +345,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '572',
+            testCases: [{ stdin: "1002", result: { stderr: "", stdout: "3", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '14', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -370,6 +385,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '5 -2 3 0 7 -1',
+            testCases: [{ stdin: "4 1 2 3 4", result: { stderr: "", stdout: "4", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '2', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -400,6 +416,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '26.5',
+            testCases: [{ stdin: "0", result: { stderr: "", stdout: "32.00", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '79.70', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -437,6 +454,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: 'programozas',
+            testCases: [{ stdin: "AEiou", result: { stderr: "", stdout: "5", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '4', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -468,6 +486,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '3 7',
+            testCases: [{ stdin: "-1 2", result: { stderr: "", stdout: "-1 0 1 2 ", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '3 4 5 6 7 ', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -501,6 +520,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '6',
+            testCases: [{ stdin: "0", result: { stderr: "", stdout: "1", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '720', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -538,6 +558,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '3 1.5 2.5 3.0',
+            testCases: [{ stdin: "2 -1.5 0.25", result: { stderr: "", stdout: "-1.25", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '7.00', 'exitCode': 0 },
             time: 4 * 60
         },
@@ -569,6 +590,7 @@ export const codeQuestions_2 =
             }
             `,
             stdin: '4',
+            testCases: [{ stdin: "2", result: { stderr: "", stdout: "2*1=2\n2*2=4\n2*3=6\n2*4=8\n2*5=10\n2*6=12\n2*7=14\n2*8=16\n2*9=18\n2*10=20\n", exitCode: 0 } }],
             result: { 'stderr': '', 'stdout': '4*1=4\n4*2=8\n4*3=12\n4*4=16\n4*5=20\n4*6=24\n4*7=28\n4*8=32\n4*9=36\n4*10=40\n', 'exitCode': 0 },
             time: 4 * 60
         }

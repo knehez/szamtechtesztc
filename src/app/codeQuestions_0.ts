@@ -158,7 +158,7 @@ export const codeQuestions_0 =
             #include <stdio.h>
             int main(void)
             {
-                int tomb[] = {1, 3, 5, 7};
+                int tomb[] = {1, 3, 6, 7};
                 int csakParatlan = 1;
                 for (int i = 0; i < 4; ++i) {
                     if (tomb[i] % 2 == 0) {
@@ -171,7 +171,7 @@ export const codeQuestions_0 =
             `,
             stdin: '',
             solution: `csakParatlan = 0;`,
-            result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '0', 'exitCode': 0 },
             time: 3 * 60
         },
         {
@@ -206,9 +206,9 @@ export const codeQuestions_0 =
             int main(void)
             {
                 char forras[] = "fa";
-                char cel[10] = "";
+                char cel[10] = {'?', '?', '?', '\\0'};
                 int i = 0;
-                while (forras[i] != '\0') {
+                while (forras[i] != '\\0') {
                     cel[i] = forras[i];
                     i++;
                 }
@@ -218,7 +218,7 @@ export const codeQuestions_0 =
             }
             `,
             stdin: '',
-            solution: `cel[i] = '\0';`,
+            solution: `cel[i] = '\\0';`,
             result: { 'stderr': '', 'stdout': 'fa', 'exitCode': 0 },
             time: 3 * 60
         },
@@ -254,7 +254,7 @@ export const codeQuestions_0 =
             {
                 char szoveg[] = "itt sok space van";
                 int darab = 0;
-                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                for (int i = 0; szoveg[i] != '\\0'; ++i) {
                     if (szoveg[i] == ' ') {
                         // HIÁNYZÓ SOR
                     }
@@ -358,7 +358,7 @@ export const codeQuestions_0 =
         },
         {
             level: 0,
-            question: 'Számítsa ki a maradékot az adott osztással.',
+            question: 'Számítsa ki a maradékot 5-el osztás után a megfelelő operátorral, és tárolja a maradékot a maradek változóban.',
             testCode: '',
             initialCode: `
             #include <stdio.h>
@@ -429,7 +429,7 @@ export const codeQuestions_0 =
             {
                 char szoveg[] = "59";
                 int szorzat = 1;
-                for (int i = 0; szoveg[i] != '\0'; ++i) {
+                for (int i = 0; szoveg[i] != '\\0'; ++i) {
                     // HIÁNYZÓ SOR
                 }
                 printf("%d", szorzat);

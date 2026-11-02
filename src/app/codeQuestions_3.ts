@@ -148,7 +148,7 @@ export const codeQuestions_3 =
         },
         { // 10
             level: 3,
-            question: 'Írjon egy "int* negyzetszam(int)" nevű függvényt, amely átvesz egy számot és ha az négyzetszám akkor 1-et ad vissza, egyébként 0-t.',
+            question: 'Írjon egy "int negyzetszam(int)" nevű függvényt, amely átvesz egy számot és ha az négyzetszám akkor 1-et ad vissza, egyébként 0-t.',
             testCode: `
             #include <stdio.h>
             main()

@@ -206,7 +206,7 @@ export const codeQuestions_4 =
             time: 5 * 60
         },
         { // 6
-            level: -1,
+            level: 4,
             question: "Egészítse ki a palindrom(const char* input) függvényt, amely 1-et ad vissza, ha a szöveg visszafelé olvasva is ugyanaz, különben 0-t. Az üres szöveg is palindróm. A hosszt a megadott ciklus számolja ki; ne használjon sztringkezelő függvényt.",
             initialCode: `
             int palindrom(const char* input)

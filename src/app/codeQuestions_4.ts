@@ -206,45 +206,56 @@ export const codeQuestions_4 =
             time: 5 * 60
         },
         { // 6
-            level: 4,
-            question: `Írjon egy C függvényt, folytatva a megkezdettet, amely kap egy sztringet, majd megvizsgálja, hogy a sztring palindróm-e (azaz ugyanaz, ha visszafelé olvassuk)`,
+            level: -1,
+            question: "Egészítse ki a palindrom(const char* input) függvényt, amely 1-et ad vissza, ha a szöveg visszafelé olvasva is ugyanaz, különben 0-t. Az üres szöveg is palindróm. A hosszt a megadott ciklus számolja ki; ne használjon sztringkezelő függvényt.",
             initialCode: `
             int palindrom(const char* input)
             {
-                int length = strlen(input);
+                int length = 0;
+                while (input[length] != '\\0') {
+                    ++length;
+                }
 
-
-
+                // Egészítse ki a karakterek összehasonlításával!
             }
             `,
             testCode: `
-            #include <string.h>
             #include <stdio.h>
             int palindrom(const char* input);
-            int main()
+            int main(void)
             {
-                if(palindrom("radar") && !palindrom("radir"))
-                {
-                    return 0;
+                char input[100];
+                if (scanf("%99s", input) != 1) {
+                    return 1;
+                }
+                if (palindrom("") != 1 || palindrom("a") != 1 ||
+                    palindrom("abba") != 1 || palindrom("ab") != 0) {
+                    return 1;
+                }
+                printf("%d", palindrom(input));
+                return 0;
+            }
+            `,
+            stdin: 'radar',
+            testCases: [
+                { stdin: 'radir', result: { stderr: '', stdout: '0', exitCode: 0 } }
+            ],
+            solution: `
+            int palindrom(const char* input)
+            {
+                int length = 0;
+                while (input[length] != '\\0') {
+                    ++length;
+                }
+                for (int i = 0, j = length - 1; i < j; ++i, --j) {
+                    if (input[i] != input[j]) {
+                        return 0;
+                    }
                 }
                 return 1;
             }
             `,
-            stdin: '',
-            solution: `
-            int palindrom(const char* input)
-            {
-                int palindrom = 1;
-                for (int i = 0, j = strlen(input) - 1; i < j; i++, j--) {
-                    if (input[i] != input[j]) {
-                        palindrom = 0;
-                        break;
-                    }
-                }
-                return palindrom;
-            }
-            `,
-            result: { 'stderr': '', 'stdout': '', 'exitCode': 0 },
+            result: { 'stderr': '', 'stdout': '1', 'exitCode': 0 },
             time: 5 * 60
         },
         { // 7
@@ -253,9 +264,9 @@ export const codeQuestions_4 =
             initialCode: `
             int szamjegyekOsszege(const char *sztring) {
                 int i, sum;
-            
+
                 sum = 0;
-            
+
 
 
 
@@ -321,10 +332,9 @@ export const codeQuestions_4 =
         },
         { // 9
             level: 4,
-            question: 'Írjon egy "void kisbetusit(char*)" nevű függvényt, amely minden karaktert kisbetűssé alakít a kapott szövegben.',
+            question: "Írjon egy \"void kisbetusit(char*)\" nevű függvényt, amely az angol nagybetűket kisbetűssé alakítja a kapott szövegben, a többi karaktert változatlanul hagyja. ASCII-karakterekkel és az 'a' - 'A' különbséggel dolgozzon, karakterkezelő függvény nélkül.",
             testCode: `
             #include <stdio.h>
-            #include <ctype.h>
             void kisbetusit(char* szoveg);
             int main(void)
             {
@@ -336,11 +346,12 @@ export const codeQuestions_4 =
             `,
             stdin: '',
             solution: `
-            #include <ctype.h>
             void kisbetusit(char *szoveg)
             {
-                for (int i = 0; szoveg[i] != '\0'; ++i) {
-                    szoveg[i] = (char)tolower((unsigned char)szoveg[i]);
+                for (int i = 0; szoveg[i] != '\\0'; ++i) {
+                    if (szoveg[i] >= 'A' && szoveg[i] <= 'Z') {
+                        szoveg[i] = szoveg[i] + ('a' - 'A');
+                    }
                 }
             }
             `,
@@ -444,10 +455,9 @@ export const codeQuestions_4 =
         },
         { // 13
             level: 4,
-            question: 'Írjon egy "int csak_alphanumerikus(const char*)" nevű függvényt, amely 1-et ad vissza, ha a szöveg minden karaktere betű vagy szám, különben 0-t.',
+            question: "Írjon egy \"int csak_alphanumerikus(const char*)\" nevű függvényt, amely 1-et ad vissza, ha a szöveg minden karaktere angol kisbetű, angol nagybetű vagy számjegy, különben 0-t. Az üres szövegre 1-et adjon vissza. Használjon karaktertartományokat (a–z, A–Z, 0–9), karakterkezelő függvény nélkül.",
             testCode: `
             #include <stdio.h>
-            #include <ctype.h>
             int csak_alphanumerikus(const char* szoveg);
             int main(void)
             {
@@ -459,8 +469,11 @@ export const codeQuestions_4 =
             solution: `
             int csak_alphanumerikus(const char *szoveg)
             {
-                for (int i = 0; szoveg[i] != '\0'; ++i) {
-                    if (!isalnum((unsigned char)szoveg[i])) {
+                for (int i = 0; szoveg[i] != '\\0'; ++i) {
+                    char c = szoveg[i];
+                    if (!((c >= 'a' && c <= 'z') ||
+                          (c >= 'A' && c <= 'Z') ||
+                          (c >= '0' && c <= '9'))) {
                         return 0;
                     }
                 }
@@ -568,10 +581,9 @@ export const codeQuestions_4 =
         },
         { // 17
             level: 4,
-            question: 'Írjon egy "void fordit_masol(const char*, char*)" nevű függvényt, amely a forrás szöveget megfordítva másolja a cél tömbbe.',
+            question: "Írjon egy \"void fordit_masol(const char*, char*)\" nevű függvényt, amely a forrás szöveget megfordítva másolja a cél tömbbe, és nullkarakterrel lezárja. A cél tömb elegendő méretű. A hosszt ciklussal határozza meg, sztringkezelő függvény nélkül.",
             testCode: `
             #include <stdio.h>
-            #include <string.h>
             void fordit_masol(const char* forras, char* cel);
             int main(void)
             {
@@ -583,14 +595,16 @@ export const codeQuestions_4 =
             `,
             stdin: '',
             solution: `
-            #include <string.h>
             void fordit_masol(const char *forras, char *cel)
             {
-                int hosszn = (int)strlen(forras);
-                for (int i = 0; i < hosszn; ++i) {
-                    cel[i] = forras[hosszn - 1 - i];
+                int hossz = 0;
+                while (forras[hossz] != '\\0') {
+                    ++hossz;
                 }
-                cel[hosszn] = '\0';
+                for (int i = 0; i < hossz; ++i) {
+                    cel[i] = forras[hossz - 1 - i];
+                }
+                cel[hossz] = '\\0';
             }
             `,
             result: { 'stderr': '', 'stdout': 'etrok', 'exitCode': 0 },

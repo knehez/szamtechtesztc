@@ -108,22 +108,23 @@ export const codeQuestions_0 =
         },
         {
             level: 0,
-            question: 'Határozza meg a szöveg hosszát a megfelelő standard függvénnyel.',
+            question: "Számolja meg a szöveg karaktereit egy ciklusban. Írja be a hiányzó sort a ++ operátorral.",
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            #include <string.h>
             int main(void)
             {
                 char szoveg[] = "korte";
                 int hossz = 0;
-                // HIÁNYZÓ SOR
+                while (szoveg[hossz] != '\\0') {
+                    // HIÁNYZÓ SOR
+                }
                 printf("%d", hossz);
                 return 0;
             }
             `,
             stdin: '',
-            solution: `hossz = strlen(szoveg);`,
+            solution: `hossz++;`,
             result: { 'stderr': '', 'stdout': '5', 'exitCode': 0 },
             time: 3 * 60
         },
@@ -270,23 +271,29 @@ export const codeQuestions_0 =
         },
         {
             level: 0,
-            question: 'Másolja át a "hello" konstans sztringet a dinamikusan foglalt területre.',
+            question: "Másolja át a forras sztring aktuális karakterét a dinamikusan foglalt területre a ciklusban, sztringkezelő függvény nélkül. Írja be a hiányzó sort.",
             testCode: '',
             initialCode: `
             #include <stdio.h>
             #include <stdlib.h>
-            #include <string.h>
             int main(void)
             {
+                char forras[] = "hello";
                 char *p = malloc(6);
-                // HIÁNYZÓ SOR
+                if (p == NULL) {
+                    return 1;
+                }
+                for (int i = 0; i < 5; ++i) {
+                    // HIÁNYZÓ SOR
+                }
+                p[5] = '\\0';
                 printf("%s", p);
                 free(p);
                 return 0;
             }
             `,
             stdin: '',
-            solution: `strcpy(p, "hello");`,
+            solution: `p[i] = forras[i];`,
             result: { 'stderr': '', 'stdout': 'hello', 'exitCode': 0 },
             time: 3 * 60
         },
@@ -338,11 +345,10 @@ export const codeQuestions_0 =
         },
         {
             level: 0,
-            question: 'Alakítsa a betűt nagybetűvé a standard függvénnyel.',
+            question: "Alakítsa az angol kisbetűt nagybetűvé az ASCII-kódok különbségével, karakterkezelő függvény nélkül. Írja be a hiányzó sort.",
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            #include <ctype.h>
             int main(void)
             {
                 char betu = 'q';
@@ -352,7 +358,7 @@ export const codeQuestions_0 =
             }
             `,
             stdin: '',
-            solution: `betu = (char)toupper((unsigned char)betu);`,
+            solution: `betu = betu - ('a' - 'A');`,
             result: { 'stderr': '', 'stdout': 'Q', 'exitCode': 0 },
             time: 3 * 60
         },
@@ -382,11 +388,13 @@ export const codeQuestions_0 =
             testCode: '',
             initialCode: `
             #include <stdio.h>
-            #include <string.h>
             int main(void)
             {
                 char s[] = "kapa";
-                int n = (int)strlen(s);
+                int n = 0;
+                while (s[n] != '\\0') {
+                    ++n;
+                }
                 char tmp = s[0];
                 s[0] = s[n - 1];
                 // HIÁNYZÓ SOR
